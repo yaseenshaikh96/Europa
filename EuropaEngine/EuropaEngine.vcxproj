@@ -139,14 +139,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\EuropaEngine.h" />
+    <ClInclude Include="src\EuropaEngine\Core\AppLayer.h" />
     <ClInclude Include="src\EuropaEngine\Core\Application.h" />
     <ClInclude Include="src\EuropaEngine\Core\EntryPoint.h" />
     <ClInclude Include="src\EuropaEnginePCH.h" />
+    <ClInclude Include="src\EuropaEngine\Graph.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EuropaEnginePCH.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="src\EuropaEngine\Core\AppLayer.cpp" />
+    <ClCompile Include="src\EuropaEngine\Core\Application.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

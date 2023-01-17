@@ -18,16 +18,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\SandBoxClient\EntryPoint.cpp">
+    <ClCompile Include="src\EuropaSandBox\EntryPoint.h">
       <Filter>src\SandBoxClient</Filter>
     </ClCompile>
+    <ClCompile Include="src\EuropaSandBox\EuropaSandBoxApp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\vendor\bin\premake\LICENSE.txt">
-      <Filter>vendor\bin\premake</Filter>
-    </None>
-    <None Include="..\vendor\bin\premake\premake5.exe">
-      <Filter>vendor\bin\premake</Filter>
-    </None>
+    <ClInclude Include="src\EuropaSandBox\EuropaSandboxApp.h" />
   </ItemGroup>
 </Project>
