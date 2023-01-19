@@ -31,7 +31,16 @@ namespace EuropaSandBox
 	}
 	void EuropaSandBoxApp::Run()
 	{
-		EuropaEngine::BTree<int> btree(1);
+		using namespace EuropaEngine;
+		BTree<int> bTree(1);
+
+		bTree.Add(10);
+		bTree.Add(20);
+		bTree.Add(30);
+		bTree.Add(40);
+		bTree.Add(50);
+
+		bTree.Print();
 
 		std::cin.get();
 	}

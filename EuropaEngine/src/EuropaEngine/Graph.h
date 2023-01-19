@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <functional>
 
 namespace EuropaEngine
 {
@@ -15,7 +16,25 @@ namespace EuropaEngine
 			Right(nullptr),
 			Left(nullptr)
 		{}
+		~BTreeNode()
+		{
+		}
+		void Delete()
+		{
+			if (Left)
+			{
+				Left->Delete();
+				Left = nullptr;
+			}
 
+			if (Right)
+			{
+				Right->Delete();
+				Right = nullptr;
+			}
+
+			delete this;
+		}
 	public:
 		void Connect(BTreeNode* left, BTreeNode* right)
 		{
@@ -40,8 +59,8 @@ namespace EuropaEngine
 		}
 
 	public:
-		BTreeNode* Left;
-		BTreeNode* Right;
+		BTreeNode* Left = nullptr;
+		BTreeNode* Right = nullptr;
 	private:
 		t_Type m_Data;
 	};
@@ -52,37 +71,77 @@ namespace EuropaEngine
 	public:
 		BTree(const t_Type& headData)
 			:
-			m_HeadNode(headData)
+			m_HeadNode(new BTreeNode<t_Type>(headData))
 		{
-			BTreeNode<t_Type> node1(10);
-			BTreeNode<t_Type> node2(20);
-			BTreeNode<t_Type> node3(30);
-			BTreeNode<t_Type> node4(40);
-			BTreeNode<t_Type> node5(50);
-		
-			m_HeadNode.Connect(&node1, &node2);
-			node1.Connect(&node3, &node4);
-			node2.Connect(&node5, nullptr);
 
-			Print();
+
+			//Print();
 		}
-
+		~BTree()
+		{
+			Delete();
+		}
+		void Delete()
+		{
+			if(m_HeadNode)
+			{
+				delete m_HeadNode;
+				m_HeadNode = nullptr;
+			}
+		}
 	public:
+		void Test() { Print(); }
 		void Print()
 		{
-			std::cout << "head: " << m_HeadNode.GetData() << std::endl;
+			std::cout << "head: " << m_HeadNode->GetData() << std::endl;
 			
-			if (m_HeadNode.Left)
+			if (m_HeadNode->Left)
 			{
-				m_HeadNode.Left->Print();
+				m_HeadNode->Left->Print();
 			}
-			if (m_HeadNode.Right)
+			if (m_HeadNode->Right)
 			{
-				m_HeadNode.Right->Print();
+				m_HeadNode->Right->Print();
+			}
+		}
+
+		void Add(const t_Type& data)
+		{
+			BTreeNode<t_Type>* newNode(new BTreeNode<t_Type>(data));
+			BTreeNode<t_Type>* currentNode = m_HeadNode;
+			uint32_t MAX_DEPTH = 100;
+			for(uint32_t i=0; i<MAX_DEPTH; i++)
+			{
+				if (data < currentNode->GetData())
+				{
+					if (currentNode->Left)
+					{
+						currentNode = currentNode->Left;
+						continue;
+					}
+					else
+					{
+						currentNode->Left = newNode;
+						break;
+					}
+				}
+				else
+				{
+					if (currentNode->Right)
+					{
+						currentNode = currentNode->Right;
+						continue;
+					}
+					else
+					{
+						currentNode->Right = newNode;
+						break;
+					}
+				}
 			}
 		}
 
 	private:
-		BTreeNode<t_Type> m_HeadNode;
+		BTreeNode<t_Type>* m_HeadNode;
 	};
 }
