@@ -1,8 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include <string>
-#include <functional>
 
 namespace EuropaEngine
 {
@@ -73,9 +71,6 @@ namespace EuropaEngine
 			:
 			m_HeadNode(new BTreeNode<t_Type>(headData))
 		{
-
-
-			//Print();
 		}
 		~BTree()
 		{
@@ -90,6 +85,9 @@ namespace EuropaEngine
 			}
 		}
 	public:
+
+		const BTreeNode<t_Type>* GetHead() const { return m_HeadNode; }
+
 		void Test() { Print(); }
 		void Print()
 		{
@@ -109,13 +107,20 @@ namespace EuropaEngine
 		{
 			BTreeNode<t_Type>* newNode(new BTreeNode<t_Type>(data));
 			BTreeNode<t_Type>* currentNode = m_HeadNode;
-			uint32_t MAX_DEPTH = 100;
-			for(uint32_t i=0; i<MAX_DEPTH; i++)
+			
+			while(true)
 			{
 				if (data < currentNode->GetData())
 				{
 					if (currentNode->Left)
 					{
+
+						if (data > currentNode->Left->GetData())
+						{
+							newNode->Left = currentNode->Left;
+							currentNode->Left = newNode;
+							break;
+						}
 						currentNode = currentNode->Left;
 						continue;
 					}
@@ -125,10 +130,16 @@ namespace EuropaEngine
 						break;
 					}
 				}
-				else
+				else if (data > currentNode->GetData())
 				{
 					if (currentNode->Right)
 					{
+						if (data < currentNode->Right->GetData())
+						{
+							newNode->Right = currentNode->Right;
+							currentNode->Right = newNode;
+							break;
+						}
 						currentNode = currentNode->Right;
 						continue;
 					}
@@ -137,6 +148,11 @@ namespace EuropaEngine
 						currentNode->Right = newNode;
 						break;
 					}
+				}
+				else
+				{
+					delete newNode; 
+					newNode = nullptr;
 				}
 			}
 		}
