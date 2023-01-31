@@ -42,6 +42,9 @@ namespace EuropaEngine
 	class LinkedListIterator
 	{
 		using t_NodeValueType = typename t_LinkedList::t_ValueType;
+		using t_NodeValuePointerType = typename t_NodeValueType*;
+		using t_NodeValueReferenceType = typename t_NodeValueType&;
+
 		using t_NodeType = typename t_LinkedList::t_NodeType;
 		using t_NodePointerType = typename t_NodeType*;
 		using t_NodeReferenceType = typename t_NodeType&;
@@ -62,7 +65,6 @@ namespace EuropaEngine
 		{
 			LinkedListIterator iterator = *this;
 			++(*this);
-			//m_Ptr = m_Ptr->GetNext();
 			return iterator;
 		}
 		LinkedListIterator& operator--()
@@ -86,7 +88,7 @@ namespace EuropaEngine
 			return iterator;
 		}
 
-		t_NodeReferenceType operator[](uint64_t index)
+		t_NodeValueReferenceType operator[](uint64_t index)
 		{
 			uint64_t i = 0;
 			t_NodePointerType next = m_Head;
@@ -96,12 +98,31 @@ namespace EuropaEngine
 				i++;
 				next = next->GetNext();
 			}
-			return *next;
+			return next->Data();
 		}
 		t_NodePointerType operator->()
 		{
 			return m_Ptr;
 		}
+
+		bool operator==(const LinkedListIterator& other)
+		{
+			if (other.m_Ptr == m_Ptr)
+			{
+				return true;
+			}
+			return false;
+		}
+		bool operator!=(const LinkedListIterator& other)
+		{
+			return !(*this == other);
+		}
+
+		t_NodeType& operator*()
+		{
+			return *m_Ptr;
+		}
+
 
 	private:
 		t_NodePointerType m_Head;
@@ -179,7 +200,7 @@ namespace EuropaEngine
 		}
 		Iterator end()
 		{
-			return LinkedListIterator<LinkedList>(m_Head, m_Tail);
+			return LinkedListIterator<LinkedList>(m_Head, nullptr);
 		}
 
 	public:

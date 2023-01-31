@@ -37,14 +37,22 @@ namespace EuropaSandBox
 		list.Add(60);
 		list.Add(70);
 
-		std::cout << list << std::endl;
+		for (auto it = list.begin(); it != list.end(); it++ )
+		{
+			std::cout << it->Data() << std::endl;
+		}
+		
+		for (auto it = list.begin(); it != list.end(); it++)
+		{
+			it->Data() = 2;
+		}
 
-		LinkedList<int>::Iterator it = list.begin();
-		it++;
-		it++;
-		std::cout << it->Data() << std::endl;
+		for (auto it = list.begin(); it != list.end(); it++)
+		{
+			std::cout << it->Data() << std::endl;
+		}
 
-
+		std::cout << "end" << std::endl;
 		std::cin.get();
 	}
 	void EuropaSandBoxApp::Run()
