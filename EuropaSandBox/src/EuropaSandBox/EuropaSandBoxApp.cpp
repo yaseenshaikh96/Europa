@@ -1,6 +1,6 @@
 #include "EuropaSandboxApp.h"
 
-#include <EuropaEngine/Graph.h>
+#include <EuropaEngine/DataStructures/LinkedList.h>
 
 class Test
 {
@@ -27,65 +27,32 @@ namespace EuropaSandBox
 		:
 		Application()
 	{
-
-	}
-	void EuropaSandBoxApp::Run()
-	{
 		using namespace EuropaEngine;
-		BTree<int> bTree(0);
-
-		bTree.Add(-10);
-		bTree.Add(-20);
-
-		bTree.Add(10);
-		bTree.Add(20);
 		
-		bTree.Add(-30);
-		bTree.Add(-40);
-		bTree.Add(-50);
+		LinkedList<int> list(10);
+		list.Add(20);
+		list.Add(30);
+		list.Add(40);
+		list.Add(50);
+		list.Add(60);
+		list.Add(70);
 
-		bTree.Add(30);
-		bTree.Add(40);
-		bTree.Add(50);
+		std::cout << list << std::endl;
 
+		LinkedList<int>::Iterator it = list.begin();
+		it++;
+		it++;
+		std::cout << it->Data() << std::endl;
 
-		bTree.Add(-15);
-		bTree.Add(-25);
-
-		bTree.Add(15);
-		bTree.Add(25);
-
-		bTree.Add(-35);
-		bTree.Add(-45);
-		bTree.Add(-55);
-
-		bTree.Add(1235);
-		bTree.Add(12);
-		bTree.Add(156);
-
-		bTree.Add(-143);
-		bTree.Add(-213);
-
-		bTree.Add(1123);
-		bTree.Add(22);
-
-		bTree.Add(-63);
-		bTree.Add(-43);
-		bTree.Add(-13);
-
-		bTree.Add(23);
-		bTree.Add(43);
-		bTree.Add(13);
-
-		bTree.Print();
-
-
-		auto head = bTree.GetHead();
 
 		std::cin.get();
 	}
-	void EuropaSandBoxApp::Close()
+	void EuropaSandBoxApp::Run()
 	{
 
+	}
+	void EuropaSandBoxApp::Close()
+	{
+		//std::cin.get();
 	}
 }

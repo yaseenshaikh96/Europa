@@ -7,4 +7,5 @@ int main()
 {
 	EuropaEngine::Application* app = EuropaEngine::CreateApplication();
 	app->Run();
+	app->Close();
 }
