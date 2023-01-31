@@ -1,7 +1,7 @@
 #include "EuropaSandboxApp.h"
 
 #include <EuropaEngine/DataStructures/LinkedList.h>
-
+#include <vector>
 class Test
 {
 public:
@@ -36,13 +36,17 @@ namespace EuropaSandBox
 		list.Add(50);
 		list.Add(60);
 		list.Add(70);
-
+		
+		
 		for (auto& value : list)
 		{
 			std::cout << value << std::endl;
 		}
-		
-		list.Remove(3);
+
+		auto iter = list.begin();
+		iter += 4;
+		iter -= 2;
+		list.Remove(iter);
 
 		std::cout << "***********" << std::endl;
 		for (auto& value : list)

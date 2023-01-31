@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 
+
 namespace EuropaEngine
 {
 	/************************************************************************************************/
@@ -19,6 +20,8 @@ namespace EuropaEngine
 		{}
 		~LinkedListNode()
 		{
+			m_Next = nullptr;
+			m_Prev = nullptr;
 		}
 	public:
 
@@ -27,12 +30,23 @@ namespace EuropaEngine
 		t_Type& Data() { return m_Data; }
 		const t_Type& Data() const { return m_Data; }
 
-		void SetNext(LinkedListNode<t_Type>* next) { m_Next = next; }
+		LinkedListNode* Get() { return this; }
+
+		void SetNext(LinkedListNode<t_Type>* next) 
+		{
+			m_Next = next;
+		}
+		void SetPrev(LinkedListNode<t_Type>* prev)
+		{
+			m_Prev = prev;
+		}
 		LinkedListNode* GetNext() const { return m_Next; }
+		LinkedListNode* GetPrev() const { return m_Prev; }
 
 	private:
 		t_Type m_Data;
 		LinkedListNode<t_Type>* m_Next = nullptr;
+		LinkedListNode<t_Type>* m_Prev = nullptr;
 	};
 
 	/************************************************************************************************/
@@ -41,21 +55,28 @@ namespace EuropaEngine
 	template<typename t_LinkedList>
 	class LinkedListIterator
 	{
-		using t_NodeValueType = typename t_LinkedList::t_ValueType;
-		using t_NodeValuePointerType = typename t_NodeValueType*;
-		using t_NodeValueReferenceType = typename t_NodeValueType&;
+		using t_ValueType = typename t_LinkedList::t_ValueType;
+		using t_ValuePointerType = typename t_ValueType*;
+		using t_ValueReferenceType = typename t_ValueType&;
 
 		using t_NodeType = typename t_LinkedList::t_NodeType;
 		using t_NodePointerType = typename t_NodeType*;
 		using t_NodeReferenceType = typename t_NodeType&;
 
 	public:
-		LinkedListIterator(t_NodePointerType head, t_NodePointerType ptr)
+		LinkedListIterator(t_NodePointerType ptr)
 			:
-			m_Head(head),
 			m_Ptr(ptr)
 		{}
-
+		LinkedListIterator& operator+=(uint64_t offSet)
+		{
+			while (offSet != 0)
+			{
+				offSet--;
+				m_Ptr = m_Ptr->GetNext();
+			}
+			return *this;
+		}
 		LinkedListIterator& operator++()
 		{
 			m_Ptr = m_Ptr->GetNext();
@@ -67,18 +88,18 @@ namespace EuropaEngine
 			++(*this);
 			return iterator;
 		}
+		LinkedListIterator& operator-=(uint64_t offSet)
+		{
+			while (offSet != 0)
+			{
+				offSet--;
+				m_Ptr = m_Ptr->GetPrev();
+			}
+			return *this;
+		}
 		LinkedListIterator& operator--()
 		{
-			t_NodePointerType next = m_Head;
-			while (next)
-			{
-				if (next->GetNext() == m_Ptr)
-				{
-					m_Ptr = next;
-					return *this;
-				}
-				next = next->GetNext();
-			}
+			m_Ptr = m_Ptr->GetPrev();
 			return *this;
 		}
 		LinkedListIterator operator--(int)
@@ -86,19 +107,6 @@ namespace EuropaEngine
 			LinkedListIterator iterator = *this;
 			--(*this);
 			return iterator;
-		}
-
-		t_NodeValueReferenceType operator[](uint64_t index)
-		{
-			uint64_t i = 0;
-			t_NodePointerType next = m_Head;
-
-			while (i != index)
-			{
-				i++;
-				next = next->GetNext();
-			}
-			return next->Data();
 		}
 		t_NodePointerType operator->()
 		{
@@ -118,15 +126,79 @@ namespace EuropaEngine
 			return !(*this == other);
 		}
 
-		t_NodeValueType& operator*()
+		t_ValueType& operator*()
 		{
 			return m_Ptr->Data();
 		}
 
+	private:
+		t_NodePointerType m_Ptr;
+	};
+
+	template<typename t_LinkedList>
+	class LinkedListConstIterator
+	{
+		using t_ValueTypeConst = typename t_LinkedList::t_ValueTypeConst;
+		using t_ValuePointerTypeConst = typename t_ValueTypeConst*;
+		using t_ValueReferenceTypeConst = typename t_ValueTypeConst&;
+
+		using t_NodeTypeConst = typename t_LinkedList::t_NodeTypeConst;
+		using t_NodePointerTypeConst = typename t_NodeTypeConst*;
+		using t_NodeReferenceTypeConst = typename t_NodeTypeConst&;
+
+	public:
+		LinkedListConstIterator(t_NodePointerTypeConst ptr)
+			:
+			m_Ptr(ptr)
+		{}
+
+		LinkedListConstIterator& operator++()
+		{
+			m_Ptr = m_Ptr->GetNext();
+			return *this;
+		}
+		LinkedListConstIterator operator++(int)
+		{
+			LinkedListConstIterator iterator = *this;
+			++(*this);
+			return iterator;
+		}
+		LinkedListConstIterator& operator--()
+		{
+			m_Ptr = m_Ptr->GetPrev();
+			return *this;
+		}
+		LinkedListConstIterator operator--(int)
+		{
+			LinkedListConstIterator iterator = *this;
+			--(*this);
+			return iterator;
+		}
+		t_NodePointerTypeConst operator->() const
+		{
+			return m_Ptr;
+		}
+
+		bool operator==(const LinkedListConstIterator& other) const
+		{
+			if (other.m_Ptr == m_Ptr)
+			{
+				return true;
+			}
+			return false;
+		}
+		bool operator!=(const LinkedListConstIterator& other) const
+		{
+			return !(*this == other);
+		}
+
+		t_ValueReferenceTypeConst operator*() const
+		{
+			return m_Ptr->Data();
+		}
 
 	private:
-		t_NodePointerType m_Head;
-		t_NodePointerType m_Ptr;
+		t_NodePointerTypeConst m_Ptr;
 	};
 
 	/************************************************************************************************/
@@ -137,8 +209,13 @@ namespace EuropaEngine
 	{
 	public:
 		using t_ValueType = t_Type;
+		using t_ValueTypeConst = const t_Type;
+
 		using t_NodeType = LinkedListNode<t_Type>;
+		using t_NodeTypeConst = const LinkedListNode<t_Type>;
+		
 		using Iterator = LinkedListIterator<LinkedList<t_Type>>;
+		using ConstIterator = LinkedListConstIterator<LinkedList<t_Type>>;
 	public:
 		LinkedList(const t_Type& headData)
 			:
@@ -168,41 +245,40 @@ namespace EuropaEngine
 		{
 			LinkedListNode<t_Type>* next = new LinkedListNode<t_Type>(data);
 			m_Tail->SetNext(next);
+			next->SetPrev(m_Tail);
 			m_Tail = next;
 			m_Size++;
 		}
-		void Add(const t_Type& data, uint64_t index)
+		void Add(const t_Type& data, Iterator iter)
 		{
 			LinkedListNode<t_Type>* newNode = new LinkedListNode<t_Type>(data);
-			if (index == 0)
+			if (iter == begin())
 			{
+				m_Head->SetPrev(newNode);
 				newNode->SetNext(m_Head->GetNext());
 				m_Head = newNode;
 				return;
 			}
-			uint64_t i = 0;
-			LinkedListNode<t_Type>* next = m_Head;
-			while (i != (index-1))
-			{
-				i++;
-				next = next->GetNext();
-			}
-			newNode->SetNext(next->GetNext());
-			next->SetNext(newNode);
+			LinkedListNode<t_Type>* nodeAtIter = iter->Get();
+
+			newNode->SetNext(nodeAtIter);
+			newNode->SetPrev(nodeAtIter->GetPrev());
+
+			nodeAtIter->GetPrev()->SetNext(newNode);
+			nodeAtIter->SetPrev(newNode);
 		}
-		void Remove(uint64_t index)
+
+		void Remove(Iterator iter)
 		{
-			uint64_t i = 0;
-			LinkedListNode<t_Type>* next = m_Head;
-			while (i != (index - 1))
-			{
-				i++;
-				next = next->GetNext();
-			}
-			LinkedListNode<t_Type>* toBeDeleted = next->GetNext();
-			next->SetNext(toBeDeleted->GetNext());
-			delete toBeDeleted;
+			LinkedListNode<t_Type>* nodeToDelete = iter->Get();
+			LinkedListNode<t_Type>* previous = nodeToDelete->GetPrev();
+			LinkedListNode<t_Type>* next = nodeToDelete->GetNext();
+			
+			previous->SetNext(next);
+			next->SetPrev(previous);
+			delete nodeToDelete;
 		}
+
 	public:
 		t_Type& At(uint64_t index)
 		{
@@ -225,25 +301,30 @@ namespace EuropaEngine
 			return next->Data();
 		}
 		
-		Iterator begin()
+		[[nodiscard]] Iterator begin()
 		{
-			return LinkedListIterator<LinkedList>(m_Head, m_Head);
+			return LinkedListIterator<LinkedList>(m_Head);
 		}
-		Iterator end()
+		[[nodiscard]] Iterator end()
 		{
-			return LinkedListIterator<LinkedList>(m_Head, nullptr);
+			return LinkedListIterator<LinkedList>(nullptr);
+		}
+		[[nodiscard]] ConstIterator begin() const
+		{
+			return LinkedListConstIterator<LinkedList>(m_Head);
+		}
+		[[nodiscard]] ConstIterator end() const
+		{
+			return LinkedListConstIterator<LinkedList>(nullptr);
 		}
 
 	public:
 		std::string ToString() const
 		{
 			std::stringstream ss;
-			ss << m_Head->Data();
-			LinkedListNode<t_Type>* next = m_Head->GetNext();
-			while (next)
+			for (auto& value : (*this))
 			{
-				ss << ", " << next->Data();
-				next = next->GetNext();
+				ss << value << ", ";
 			}
 			return ss.str();
 		}
