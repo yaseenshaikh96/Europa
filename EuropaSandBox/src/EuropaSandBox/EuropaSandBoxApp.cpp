@@ -37,19 +37,17 @@ namespace EuropaSandBox
 		list.Add(60);
 		list.Add(70);
 
-		for (auto it = list.begin(); it != list.end(); it++ )
+		for (auto& value : list)
 		{
-			std::cout << it->Data() << std::endl;
+			std::cout << value << std::endl;
 		}
 		
-		for (auto it = list.begin(); it != list.end(); it++)
-		{
-			it->Data() = 2;
-		}
+		list.Remove(3);
 
-		for (auto it = list.begin(); it != list.end(); it++)
+		std::cout << "***********" << std::endl;
+		for (auto& value : list)
 		{
-			std::cout << it->Data() << std::endl;
+			std::cout << value << std::endl;
 		}
 
 		std::cout << "end" << std::endl;

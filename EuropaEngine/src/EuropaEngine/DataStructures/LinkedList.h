@@ -118,9 +118,9 @@ namespace EuropaEngine
 			return !(*this == other);
 		}
 
-		t_NodeType& operator*()
+		t_NodeValueType& operator*()
 		{
-			return *m_Ptr;
+			return m_Ptr->Data();
 		}
 
 
@@ -171,7 +171,38 @@ namespace EuropaEngine
 			m_Tail = next;
 			m_Size++;
 		}
-
+		void Add(const t_Type& data, uint64_t index)
+		{
+			LinkedListNode<t_Type>* newNode = new LinkedListNode<t_Type>(data);
+			if (index == 0)
+			{
+				newNode->SetNext(m_Head->GetNext());
+				m_Head = newNode;
+				return;
+			}
+			uint64_t i = 0;
+			LinkedListNode<t_Type>* next = m_Head;
+			while (i != (index-1))
+			{
+				i++;
+				next = next->GetNext();
+			}
+			newNode->SetNext(next->GetNext());
+			next->SetNext(newNode);
+		}
+		void Remove(uint64_t index)
+		{
+			uint64_t i = 0;
+			LinkedListNode<t_Type>* next = m_Head;
+			while (i != (index - 1))
+			{
+				i++;
+				next = next->GetNext();
+			}
+			LinkedListNode<t_Type>* toBeDeleted = next->GetNext();
+			next->SetNext(toBeDeleted->GetNext());
+			delete toBeDeleted;
+		}
 	public:
 		t_Type& At(uint64_t index)
 		{
