@@ -4,6 +4,7 @@
 #include <string>
 #include <sstream>
 
+#include "EuropaEngine/Core/Defines.h"
 
 namespace EuropaEngine
 {
@@ -228,15 +229,13 @@ namespace EuropaEngine
 	
 	public:
 		LinkedList()
-			:
-			m_Head(nullptr),
-			m_Tail(m_Head),
-			m_Size(0)
 		{}
 		LinkedList(const LinkedList<t_Type>& other)
-			:
-			LinkedList()
 		{
+			if (this == &other)
+			{
+				return;
+			}
 			DeepCopy(other);
 		}
 		void DeepCopy(const LinkedList<t_Type>& other)
@@ -250,15 +249,21 @@ namespace EuropaEngine
 				next = next->GetNext();
 			}
 		}
-		LinkedList<t_Type> operator=(const LinkedList<t_Type>& other)
+		LinkedList<t_Type>& operator=(const LinkedList<t_Type>& other)
 		{
-			return LinkedList<t_Type>(other);
+			if (this == &other)
+			{
+				return *this;
+			}
+			DeepCopy();
+			return *this;
 		}
 		LinkedList(LinkedList<t_Type>&& other) noexcept
-			:
-			LinkedList()
 		{
-			std::cout << "Moved!" << std::endl;
+			if (this == &other)
+			{
+				return;
+			}
 
 			m_Head = other.m_Head;
 			m_Tail = other.m_Tail;
@@ -268,7 +273,6 @@ namespace EuropaEngine
 			other.m_Tail = nullptr;
 			other.m_Size = 0;
 		}
-
 		void Delete()
 		{
 			if (!m_Head)
@@ -284,12 +288,13 @@ namespace EuropaEngine
 				delete temp;
 			}
 			m_Head = nullptr;
+			m_Tail = nullptr;
+			m_Size = 0;
 		}
 		~LinkedList()
 		{
 			Delete();
 		}
-
 	
 	public:
 		void Add(t_Type&& data)
@@ -311,12 +316,39 @@ namespace EuropaEngine
 
 		void Remove(Iterator iter)
 		{
-			LinkedListNode<t_Type>* nodeToDelete = iter->Get();
+			if (m_Size <= 1)
+			{
+				Delete();
+				return;
+			}
+			if (iter == begin())
+			{
+				m_Head = m_Head->GetNext();
+				delete m_Head->GetPrev();
+				m_Head->SetPrev(nullptr);
+				if (m_Size == 2)
+				{
+					m_Tail = m_Head;
+				}
+				return;
+			}
+			if (iter == end())
+			{
+				m_Tail = m_Tail->GetPrev();
+				delete m_Tail->GetNext();
+				m_Tail->SetNext(nullptr);
+				if (m_Size == 2)
+				{
+					m_Tail = m_Head;
+				}
+				return;
+			}
+			LinkedListNode<t_Type>* nodeToDelete = iter.Get();
 			LinkedListNode<t_Type>* previous = nodeToDelete->GetPrev();
 			LinkedListNode<t_Type>* next = nodeToDelete->GetNext();
-
 			previous->SetNext(next);
 			next->SetPrev(previous);
+			m_Size--;
 			delete nodeToDelete;
 		}
 	private:
@@ -345,11 +377,16 @@ namespace EuropaEngine
 					m_Head->SetNext(m_Tail);
 					return;
 				}
-
-
 				m_Head->SetPrev(newNode);
 				newNode->SetNext(m_Head);
 				m_Head = newNode;
+				return;
+			}
+			if (iter == end())
+			{
+				m_Tail->SetNext(newNode);
+				newNode->SetPrev(m_Tail);
+				m_Tail = newNode;
 				return;
 			}
 
@@ -363,16 +400,10 @@ namespace EuropaEngine
 		}
 
 	public:
-		t_Type& At(uint64_t index)
-		{
-			if (index >= m_Size)
-			{
-				__debugbreak();
-			}
-			return (*this)[index];
-		}
 		t_Type& operator[](uint64_t index)
 		{
+			EUROPA_ASSERT(index < m_Size, "IndexOutOfBound!");
+
 			size_t i = 0;
 			LinkedListNode<t_Type>* next = m_Head;
 
@@ -427,9 +458,9 @@ namespace EuropaEngine
 		}
 
 	private:
-		LinkedListNode<t_Type>* m_Head;
-		LinkedListNode<t_Type>* m_Tail;
-		uint64_t m_Size;
+		LinkedListNode<t_Type>* m_Head = nullptr;
+		LinkedListNode<t_Type>* m_Tail = nullptr;
+		uint64_t m_Size = 0;
 	};
 
 

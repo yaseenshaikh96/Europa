@@ -25,5 +25,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EuropaSandBox\EuropaSandboxApp.h" />
+    <ClInclude Include="src\EuropaSandBox\TestClasses\LinkedListTest.h" />
   </ItemGroup>
 </Project>

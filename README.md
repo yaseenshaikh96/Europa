@@ -1,3 +1,3 @@
 # Europa
 
-Sandbox environment for c++
+Sandbox environment for learning c++

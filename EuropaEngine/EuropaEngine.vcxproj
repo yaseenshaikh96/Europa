@@ -141,6 +141,7 @@
     <ClInclude Include="src\EuropaEngine.h" />
     <ClInclude Include="src\EuropaEngine\Core\AppLayer.h" />
     <ClInclude Include="src\EuropaEngine\Core\Application.h" />
+    <ClInclude Include="src\EuropaEngine\Core\Defines.h" />
     <ClInclude Include="src\EuropaEngine\Core\EntryPoint.h" />
     <ClInclude Include="src\EuropaEnginePCH.h" />
     <ClInclude Include="src\EuropaEngine\DataStructures\Graph.h" />

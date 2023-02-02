@@ -148,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EuropaSandBox\EuropaSandboxApp.h" />
+    <ClInclude Include="src\EuropaSandBox\TestClasses\LinkedListTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
