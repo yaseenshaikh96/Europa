@@ -1,7 +1,7 @@
 #include "EuropaSandboxApp.h"
 
 #include <EuropaEngine/DataStructures/LinkedList.h>
-#include <vector>
+
 class Test
 {
 public:
@@ -11,6 +11,20 @@ public:
 	{
 		std::cout << "Constructor!" << std::endl;
 	}
+	Test(Test&& other) noexcept
+		:
+		m_Int(other.m_Int)
+	{
+		other.m_Int = 0;
+		std::cout << "Variable MoveCopy Constructor" << std::endl;
+	}
+	Test(const Test& other)
+		:
+		m_Int(other.m_Int)
+	{
+		std::cout << "Variable HardCopy Constructor" << std::endl;
+	}
+
 public:
 	int m_Int = 10;
 };
@@ -29,27 +43,30 @@ namespace EuropaSandBox
 	{
 		using namespace EuropaEngine;
 		
-		LinkedList<int> list(10);
-		list.Add(20);
-		list.Add(30);
-		list.Add(40);
-		list.Add(50);
-		list.Add(60);
-		list.Add(70);
+		LinkedList<Test> list1;
+
+		list1.Add(Test(10));
+		list1.Add(Test(20));
+		list1.Add(Test(30));
+		list1.Add(Test(40));
+		list1.Add(Test(50));
 		
-		
-		for (auto& value : list)
+		std::cout << "List1: before move" << std::endl;
+		for (auto& value : list1)
 		{
 			std::cout << value << std::endl;
 		}
 
-		auto iter = list.begin();
-		iter += 4;
-		iter -= 2;
-		list.Remove(iter);
+		LinkedList<Test> list2(std::move(list1));
 
-		std::cout << "***********" << std::endl;
-		for (auto& value : list)
+		std::cout << "List1: after move" << std::endl;
+		for (auto& value : list1)
+		{
+			std::cout << value << std::endl;
+		}
+
+		std::cout << "List2: move" << std::endl;
+		for (auto& value : list2)
 		{
 			std::cout << value << std::endl;
 		}

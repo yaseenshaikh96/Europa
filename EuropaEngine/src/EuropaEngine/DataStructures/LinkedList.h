@@ -18,6 +18,10 @@ namespace EuropaEngine
 			:
 			m_Data(data)
 		{}
+		LinkedListNode(t_Type&& data)
+			:
+			m_Data(std::move(data))
+		{}
 		~LinkedListNode()
 		{
 			m_Next = nullptr;
@@ -131,6 +135,11 @@ namespace EuropaEngine
 			return m_Ptr->Data();
 		}
 
+		t_NodePointerType Get()
+		{
+			return m_Ptr;
+		}
+
 	private:
 		t_NodePointerType m_Ptr;
 	};
@@ -216,56 +225,88 @@ namespace EuropaEngine
 
 		using Iterator = LinkedListIterator<LinkedList<t_Type>>;
 		using ConstIterator = LinkedListConstIterator<LinkedList<t_Type>>;
+	
 	public:
-		LinkedList(const t_Type& headData)
+		LinkedList()
 			:
-			m_Head(new LinkedListNode<t_Type>(headData)),
+			m_Head(nullptr),
 			m_Tail(m_Head),
-			m_Size(1)
+			m_Size(0)
 		{}
-		~LinkedList()
+		LinkedList(const LinkedList<t_Type>& other)
+			:
+			LinkedList()
+		{
+			DeepCopy(other);
+		}
+		void DeepCopy(const LinkedList<t_Type>& other)
 		{
 			Delete();
+
+			const LinkedListNode<t_Type>* next = other.m_Head;
+			while (next)
+			{
+				Add(next->Data());
+				next = next->GetNext();
+			}
 		}
+		LinkedList<t_Type> operator=(const LinkedList<t_Type>& other)
+		{
+			return LinkedList<t_Type>(other);
+		}
+		LinkedList(LinkedList<t_Type>&& other) noexcept
+			:
+			LinkedList()
+		{
+			std::cout << "Moved!" << std::endl;
+
+			m_Head = other.m_Head;
+			m_Tail = other.m_Tail;
+			m_Size = other.m_Size;
+
+			other.m_Head = nullptr;
+			other.m_Tail = nullptr;
+			other.m_Size = 0;
+		}
+
 		void Delete()
 		{
+			if (!m_Head)
+			{
+				return;
+			}
 			LinkedListNode<t_Type>* temp;
-			LinkedListNode<t_Type>* next = m_Head->GetNext();
-			delete m_Head;
-			m_Head = nullptr;
+			LinkedListNode<t_Type>* next = m_Head;
 			while (next)
 			{
 				temp = next;
 				next = next->GetNext();
 				delete temp;
 			}
+			m_Head = nullptr;
 		}
+		~LinkedList()
+		{
+			Delete();
+		}
+
+	
 	public:
+		void Add(t_Type&& data)
+		{
+			InternalAdd(new LinkedListNode<t_Type>(data));
+		}
 		void Add(const t_Type& data)
 		{
-			LinkedListNode<t_Type>* next = new LinkedListNode<t_Type>(data);
-			m_Tail->SetNext(next);
-			next->SetPrev(m_Tail);
-			m_Tail = next;
-			m_Size++;
+			InternalAdd(new LinkedListNode<t_Type>(data));
 		}
 		void Add(const t_Type& data, Iterator iter)
 		{
-			LinkedListNode<t_Type>* newNode = new LinkedListNode<t_Type>(data);
-			if (iter == begin())
-			{
-				m_Head->SetPrev(newNode);
-				newNode->SetNext(m_Head->GetNext());
-				m_Head = newNode;
-				return;
-			}
-			LinkedListNode<t_Type>* nodeAtIter = iter->Get();
-
-			newNode->SetNext(nodeAtIter);
-			newNode->SetPrev(nodeAtIter->GetPrev());
-
-			nodeAtIter->GetPrev()->SetNext(newNode);
-			nodeAtIter->SetPrev(newNode);
+			InternalIterAdd(new LinkedListNode<t_Type>(data), iter);
+		}
+		void Add(t_Type&& data, Iterator iter)
+		{
+			InternalIterAdd(new LinkedListNode<t_Type>(data), iter);
 		}
 
 		void Remove(Iterator iter)
@@ -277,6 +318,48 @@ namespace EuropaEngine
 			previous->SetNext(next);
 			next->SetPrev(previous);
 			delete nodeToDelete;
+		}
+	private:
+		void InternalAdd(LinkedListNode<t_Type>* newNode)
+		{
+			if (!m_Head)
+			{
+				m_Head = newNode;
+				m_Tail = m_Head;
+			}
+			else
+			{
+				m_Tail->SetNext(newNode);
+				newNode->SetPrev(m_Tail);
+				m_Tail = newNode;
+			}
+			m_Size++;
+		}
+		void InternalIterAdd(LinkedListNode<t_Type>* newNode, Iterator iter)
+		{
+			if (iter == begin())
+			{
+				if (!m_Head)
+				{
+					m_Head = newNode;
+					m_Head->SetNext(m_Tail);
+					return;
+				}
+
+
+				m_Head->SetPrev(newNode);
+				newNode->SetNext(m_Head);
+				m_Head = newNode;
+				return;
+			}
+
+			LinkedListNode<t_Type>* nodeAtIter = iter->Get();
+
+			newNode->SetNext(nodeAtIter);
+			newNode->SetPrev(nodeAtIter->GetPrev());
+
+			nodeAtIter->GetPrev()->SetNext(newNode);
+			nodeAtIter->SetPrev(newNode);
 		}
 
 	public:
@@ -318,6 +401,20 @@ namespace EuropaEngine
 			return LinkedListConstIterator<LinkedList>(nullptr);
 		}
 
+
+	public:
+		LinkedList<t_Type> Reverse()
+		{
+			LinkedList<t_Type> reverseList;
+			LinkedListNode<t_Type>* prev = m_Tail;
+			while (prev)
+			{
+				reverseList.Add(prev->Data());
+				prev = prev->GetPrev();
+			}
+			return reverseList;
+		}
+
 	public:
 		std::string ToString() const
 		{
@@ -330,9 +427,9 @@ namespace EuropaEngine
 		}
 
 	private:
-		uint64_t m_Size;
 		LinkedListNode<t_Type>* m_Head;
 		LinkedListNode<t_Type>* m_Tail;
+		uint64_t m_Size;
 	};
 
 
