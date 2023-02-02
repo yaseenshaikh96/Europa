@@ -1,8 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <string>
-#include <sstream>
+#include "EuropaEnginePCH.h"
 
 #include "EuropaEngine/Core/Defines.h"
 
@@ -37,16 +35,17 @@ namespace EuropaEngine
 
 		LinkedListNode* Get() { return this; }
 
+		LinkedListNode* GetNext() const { return m_Next; }
 		void SetNext(LinkedListNode<t_Type>* next)
 		{
 			m_Next = next;
 		}
+
+		LinkedListNode* GetPrev() const { return m_Prev; }
 		void SetPrev(LinkedListNode<t_Type>* prev)
 		{
 			m_Prev = prev;
 		}
-		LinkedListNode* GetNext() const { return m_Next; }
-		LinkedListNode* GetPrev() const { return m_Prev; }
 
 	private:
 		t_Type m_Data;

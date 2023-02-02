@@ -17,8 +17,8 @@ namespace EuropaSandBox
 			:
 			m_Int(other.m_Int)
 		{
-			other.m_Int = 0;
 			std::cout << "Variable MoveCopy Constructor" << std::endl;
+			other.m_Int = 0;
 		}
 		Test(const Test& other)
 			:

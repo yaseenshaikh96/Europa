@@ -17,7 +17,7 @@
       <Filter>EuropaEngine\Core</Filter>
     </ClInclude>
     <ClInclude Include="src\EuropaEnginePCH.h" />
-    <ClInclude Include="src\EuropaEngine\DataStructures\Graph.h" />
+    <ClInclude Include="src\EuropaEngine\DataStructures\BTree.h" />
     <ClInclude Include="src\EuropaEngine\Core\AppLayer.h" />
     <ClInclude Include="src\EuropaEngine\DataStructures\LinkedList.h" />
     <ClInclude Include="src\EuropaEngine\Core\Defines.h" />

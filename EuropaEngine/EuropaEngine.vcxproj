@@ -144,7 +144,7 @@
     <ClInclude Include="src\EuropaEngine\Core\Defines.h" />
     <ClInclude Include="src\EuropaEngine\Core\EntryPoint.h" />
     <ClInclude Include="src\EuropaEnginePCH.h" />
-    <ClInclude Include="src\EuropaEngine\DataStructures\Graph.h" />
+    <ClInclude Include="src\EuropaEngine\DataStructures\BTree.h" />
     <ClInclude Include="src\EuropaEngine\DataStructures\LinkedList.h" />
   </ItemGroup>
   <ItemGroup>
