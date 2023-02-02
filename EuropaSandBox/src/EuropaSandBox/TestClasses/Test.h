@@ -24,10 +24,11 @@ namespace EuropaSandBox
 			:
 			m_Int(other.m_Int)
 		{
-			std::cout << "Variable HardCopy Constructor" << std::endl;
+			std::cout << "Variable DeepCopy Constructor" << std::endl;
 		}
 		Test& operator=(const Test& other)
 		{
+			std::cout << "Variable Assignment Constructor" << std::endl;
 			if (this == &other)
 			{
 				return *this;

@@ -298,7 +298,7 @@ namespace EuropaEngine
 	public:
 		void Add(t_Type&& data)
 		{
-			InternalAdd(new LinkedListNode<t_Type>(data));
+			InternalAdd(new LinkedListNode<t_Type>(std::move(data)));
 		}
 		void Add(const t_Type& data)
 		{
@@ -310,18 +310,22 @@ namespace EuropaEngine
 		}
 		void Add(t_Type&& data, Iterator iter)
 		{
-			InternalIterAdd(new LinkedListNode<t_Type>(data), iter);
+			InternalIterAdd(new LinkedListNode<t_Type>(std::move(data)), iter);
 		}
 
-		void Remove(Iterator iter)
+		t_Type&& Remove(Iterator iter)
 		{
-			if (m_Size <= 1)
+			EUROPA_ASSERT(m_Size > 0, "Cannot remove from empty list!");
+	
+			if (m_Size == 1)
 			{
+				t_Type temp(std::move(m_Head->Data()));
 				Delete();
-				return;
+				return std::move(temp);
 			}
 			if (iter == begin())
 			{
+				t_Type temp(std::move(m_Head->Data()));
 				m_Head = m_Head->GetNext();
 				delete m_Head->GetPrev();
 				m_Head->SetPrev(nullptr);
@@ -329,10 +333,11 @@ namespace EuropaEngine
 				{
 					m_Tail = m_Head;
 				}
-				return;
+				return std::move(temp);
 			}
 			if (iter == end())
 			{
+				t_Type temp(std::move(m_Tail->Data()));
 				m_Tail = m_Tail->GetPrev();
 				delete m_Tail->GetNext();
 				m_Tail->SetNext(nullptr);
@@ -340,15 +345,18 @@ namespace EuropaEngine
 				{
 					m_Tail = m_Head;
 				}
-				return;
+				return std::move(temp);
 			}
+
 			LinkedListNode<t_Type>* nodeToDelete = iter.Get();
 			LinkedListNode<t_Type>* previous = nodeToDelete->GetPrev();
 			LinkedListNode<t_Type>* next = nodeToDelete->GetNext();
+			t_Type temp(std::move(nodeToDelete->Data()));
 			previous->SetNext(next);
 			next->SetPrev(previous);
 			m_Size--;
 			delete nodeToDelete;
+			return std::move(temp);
 		}
 	private:
 		void InternalAdd(LinkedListNode<t_Type>* newNode)
@@ -368,17 +376,20 @@ namespace EuropaEngine
 		}
 		void InternalIterAdd(LinkedListNode<t_Type>* newNode, Iterator iter)
 		{
+			if (m_Size == 0)
+			{
+				m_Head = newNode;
+				m_Tail = m_Head;
+				m_Size++;
+				return;
+			}
+
 			if (iter == begin())
 			{
-				if (!m_Head)
-				{
-					m_Head = newNode;
-					m_Head->SetNext(m_Tail);
-					return;
-				}
 				m_Head->SetPrev(newNode);
 				newNode->SetNext(m_Head);
 				m_Head = newNode;
+				m_Size++;
 				return;
 			}
 			if (iter == end())
@@ -386,6 +397,7 @@ namespace EuropaEngine
 				m_Tail->SetNext(newNode);
 				newNode->SetPrev(m_Tail);
 				m_Tail = newNode;
+				m_Size++;
 				return;
 			}
 
@@ -396,6 +408,7 @@ namespace EuropaEngine
 
 			nodeAtIter->GetPrev()->SetNext(newNode);
 			nodeAtIter->SetPrev(newNode);
+			m_Size;;
 		}
 
 	public:

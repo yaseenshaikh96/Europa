@@ -15,6 +15,22 @@ namespace EuropaEngine
 			:
 			m_Data(data)
 		{}
+		BTreeNode(t_Type&& data)
+			:
+			m_Data(std::move(data))
+		{}
+		void Delete()
+		{
+			delete m_LeftChild;
+			delete m_RightChild;
+			m_LeftChild = nullptr;
+			m_RightChild = nullptr;
+		}
+		~BTreeNode()
+		{
+			Delete();
+		}
+
 	public:
 		t_Type& Data() { return &m_Data; }
 
@@ -29,10 +45,29 @@ namespace EuropaEngine
 
 
 	private:
-		BTreeNode<t_Type>* m_Parent;
-		BTreeNode<t_Type>* m_LeftChild;
-		BTreeNode<t_Type>* m_RightChild;
+		BTreeNode<t_Type>* m_Parent = nullptr;
+		BTreeNode<t_Type>* m_LeftChild = nullptr;
+		BTreeNode<t_Type>* m_RightChild = nullptr;
 		t_Type m_Data;
+	};
+
+	/************************************************************************************************************************************************/
+	/* Iterators */
+	/************************************************************************************************************************************************/
+	template<typename t_BTree>
+	class BTreeBaseIterator
+	{
+		// need stack
+	};
+	template<typename t_BTree>
+	class BTreeIterator : public BTreeBaseIterator<t_BTree>
+	{
+
+	};
+	template<typename t_BTree>
+	class BTreeConstIterator : public BTreeBaseIterator<t_BTree>
+	{
+
 	};
 
 	/************************************************************************************************************************************************/
@@ -41,10 +76,46 @@ namespace EuropaEngine
 	template<typename t_Type>
 	class BTree
 	{
+		using t_ValueType = typename t_Type;
+		using t_ValueTypeConst = typename const t_ValueType;
+
+		using t_NodeType = BTreeNode<t_Type>;
+		using t_NodeTypeConst = const BTreeNode<t_Type>;
+
+		using Iterator = BTreeIterator<BTree<t_Type>>;
+		using ConstIterator = BTreeConstIterator<BTree<t_Type>>;
+
 	public:
 		BTree()
 		{}
-
+		BTree(const BTree& other)
+		{
+			if (this == &other)
+			{
+				return;
+			}
+			DeepCopy();
+		}
+		BTree& operator=(const BTree& other)
+		{
+			if (this == &other)
+			{
+				return &this;
+			}
+			DeepCopy();
+		}
+		void DeepCopy(const BTree& other)
+		{
+			// iterator!
+		}
+		void Delete()
+		{
+			delete m_Root;
+		}
+		~BTree()
+		{
+			Delete();
+		}
 	public:
 		void Add(const t_Type& data)
 		{
@@ -54,7 +125,6 @@ namespace EuropaEngine
 			{
 				m_Root = newNode;
 			}
-
 		}
 
 	private:
