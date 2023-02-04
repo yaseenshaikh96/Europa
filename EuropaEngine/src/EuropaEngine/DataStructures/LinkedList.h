@@ -358,7 +358,37 @@ namespace EuropaEngine
 			delete nodeToDelete;
 			return std::move(temp);
 		}
+
 	private:
+		void InternalAddAtBegin(LinkedListNode<t_Type>* newNode)
+		{
+
+			m_Head->SetPrev(newNode);
+			newNode->SetNext(m_Head);
+			m_Head = newNode;
+			m_Size++;
+			return;
+		}
+		void InternalAddAtMiddle(LinkedListNode<t_Type>* newNode, Iterator iter)
+		{
+			LinkedListNode<t_Type>* nodeAtIter = iter->Get();
+
+			newNode->SetNext(nodeAtIter);
+			newNode->SetPrev(nodeAtIter->GetPrev());
+
+			nodeAtIter->GetPrev()->SetNext(newNode);
+			nodeAtIter->SetPrev(newNode);
+			m_Size++;
+			return;
+		}
+		void InternalAddAtEnd(LinkedListNode<t_Type>* newNode)
+		{
+			m_Tail->SetNext(newNode);
+			newNode->SetPrev(m_Tail);
+			m_Tail = newNode;
+			m_Size++;
+			return;
+		}
 		void InternalAdd(LinkedListNode<t_Type>* newNode)
 		{
 			if (!m_Head)
@@ -383,35 +413,38 @@ namespace EuropaEngine
 				m_Size++;
 				return;
 			}
-
 			if (iter == begin())
 			{
-				m_Head->SetPrev(newNode);
-				newNode->SetNext(m_Head);
-				m_Head = newNode;
-				m_Size++;
+				InternalAddAtBegin(newNode);
 				return;
 			}
 			if (iter == end())
 			{
-				m_Tail->SetNext(newNode);
-				newNode->SetPrev(m_Tail);
-				m_Tail = newNode;
-				m_Size++;
+				InternalAddAtEnd(newNode);
 				return;
 			}
-
-			LinkedListNode<t_Type>* nodeAtIter = iter->Get();
-
-			newNode->SetNext(nodeAtIter);
-			newNode->SetPrev(nodeAtIter->GetPrev());
-
-			nodeAtIter->GetPrev()->SetNext(newNode);
-			nodeAtIter->SetPrev(newNode);
-			m_Size;;
+			InternalAddAtMiddle(newNode, iter);
 		}
 
 	public:
+		uint64_t Size() const { return m_Size; }
+
+		t_Type& operator[](Iterator iter)
+		{
+			if (iter == end())
+			{
+				return m_Tail->Data();
+			}
+			return iter->Data();
+		}
+		const t_Type& operator[](ConstIterator iter)
+		{
+			if (iter == end())
+			{
+				return iter->Data();
+			}
+			return iter->Data();
+		}
 		t_Type& operator[](uint64_t index)
 		{
 			EUROPA_ASSERT(index < m_Size, "IndexOutOfBound!");

@@ -2,6 +2,8 @@
 
 #include <EuropaEngine/DataStructures/LinkedList.h>
 #include <EuropaEngine/DataStructures/Stack.h>
+#include <EuropaEngine/DataStructures/Queue.h>
+#include <EuropaEngine/DataStructures/BTree.h>
 
 #include "TestClasses/Test.h"
 
@@ -14,16 +16,8 @@ namespace EuropaSandBox
 	{
 		using namespace EuropaEngine;
 		
-		Stack<Test> stack;
-		stack.Push(Test(10));
-		stack.Push(Test(20));
-		stack.Push(Test(30));
-
-
-		std::cout << "\n\n" << "stack:" << stack << std::endl;
-		Test value = stack.Pop();
-		std::cout << "\n\n" << "value: " << value << std::endl;
-		std::cout << "\n\n" << "stack:" << stack << std::endl;
+		BTree<Test> btree;
+		std::cout << btree << std::endl;
 
 
 		std::cout << "end" << std::endl;

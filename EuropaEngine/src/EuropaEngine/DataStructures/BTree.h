@@ -2,6 +2,8 @@
 
 #include "EuropaEnginePCH.h"
 
+#include "Stack.h"
+
 namespace EuropaEngine
 {
 	template<typename t_Type>
@@ -32,7 +34,8 @@ namespace EuropaEngine
 		}
 
 	public:
-		t_Type& Data() { return &m_Data; }
+		t_Type& Data() { return m_Data; }
+		const t_Type& Data() const { return m_Data; }
 
 		BTreeNode<t_Type>* GetLeftChild() const { return m_LeftChild; }
 		void SetLeftChild(BTreeNode<t_Type>* leftChild) { m_LeftChild = leftChild; }
@@ -87,7 +90,24 @@ namespace EuropaEngine
 
 	public:
 		BTree()
-		{}
+		{
+			BTreeNode<t_Type>* A = new BTreeNode<t_Type>(t_Type(10));
+			BTreeNode<t_Type>* B = new BTreeNode<t_Type>(t_Type(20));
+			BTreeNode<t_Type>* C = new BTreeNode<t_Type>(t_Type(30));
+			BTreeNode<t_Type>* D = new BTreeNode<t_Type>(t_Type(40));
+			BTreeNode<t_Type>* E = new BTreeNode<t_Type>(t_Type(40));
+			BTreeNode<t_Type>* F = new BTreeNode<t_Type>(t_Type(40));
+		
+			m_Root = A;
+
+			A->SetLeftChild(B);
+			A->SetRightChild(C);
+
+			B->SetLeftChild(D);
+			B->SetRightChild(E);
+
+			C->SetLeftChild(F);
+		}
 		BTree(const BTree& other)
 		{
 			if (this == &other)
@@ -126,11 +146,44 @@ namespace EuropaEngine
 				m_Root = newNode;
 			}
 		}
+		std::string ToString() const
+		{
+			std::stringstream ss;
+			Stack<BTreeNode<t_Type>*> stack;
+			if (!m_Root)
+			{
+				return "Empty Tree!";
+			}
+			BTreeNode<t_Type>* current;
+
+			stack.Push(m_Root);
+
+			while (stack.Size() != 0)
+			{
+				current = stack.Pop();
+				ss << "Value: " << current->Data() << std::endl;
+				if (current->GetLeftChild())
+				{
+					stack.Push(current->GetLeftChild());
+				}
+				if (current->GetRightChild())
+				{
+					stack.Push(current->GetRightChild());
+				}
+			}
+			ss << "End!" << std::endl;
+			return ss.str();
+		}
 
 	private:
 		BTreeNode<t_Type>* m_Root = nullptr;
 		uint64_t m_Size = 0;
 	};
 
-
+	template<typename t_Type>
+	std::ostream& operator<<(std::ostream& os, const BTree<t_Type>& ref)
+	{
+		os << ref.ToString();
+		return os;
+	}
 }

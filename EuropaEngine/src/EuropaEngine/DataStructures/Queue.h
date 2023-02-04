@@ -5,24 +5,18 @@
 namespace EuropaEngine
 {
 	template<typename t_Type>
-	class Stack
+	class Queue
 	{
 	public:
-		uint64_t Size() const { return m_List.Size(); }
-
-		bool IsEmpty()
+		void Enqueue(const t_Type& data)
 		{
-
+			m_List.Add(data, m_List.end());
 		}
-		void Push(const t_Type& data)
+		void Enqueue(t_Type&& data)
 		{
-			m_List.Add(data, m_List.begin());
+			m_List.Add(std::move(data), m_List.end());
 		}
-		void Push(t_Type&& data)
-		{
-			m_List.Add(std::move(data), m_List.begin());
-		}
-		t_Type&& Pop()
+		t_Type&& Dequeue()
 		{
 			return std::move(m_List.Remove(m_List.begin()));
 		}
@@ -42,7 +36,7 @@ namespace EuropaEngine
 	};
 
 	template<typename t_Type>
-	std::ostream& operator<<(std::ostream& os, const Stack<t_Type>& ref)
+	std::ostream& operator<<(std::ostream& os, const Queue<t_Type>& ref)
 	{
 		os << ref.ToString();
 		return os;
