@@ -8,6 +8,56 @@ namespace EuropaEngine
 	class Stack
 	{
 	public:
+		Stack() {}
+		Stack(const Stack& other)
+		{
+
+			if (this == &other)
+			{
+				return;
+			}
+			DeepCopy(other);
+		}
+		void DeepCopy(const Stack& other)
+		{
+			std::cout << "Stack DeepCopy" << std::endl;
+			Delete();
+			m_List.DeepCopy(other.m_List);
+		}
+		void ShallowCopy(const Stack& other)
+		{
+			Delete();
+			m_List = other.m_List;
+		}
+		Stack<t_Type>& operator=(const Stack<t_Type>& other)
+		{
+			if (this == &other)
+			{
+				return *this;
+			}
+			ShallowCopy();
+			return *this;
+		}
+		Stack(Stack<t_Type>&& other) noexcept
+		{
+			std::cout << "Stack MoveCopy" << std::endl;
+
+			if (this == &other)
+			{
+				return;
+			}
+			m_List = other.m_List;
+			other.m_List.ShallowDelete();
+		}
+
+		void Delete()
+		{
+		}
+		~Stack()
+		{
+			Delete();
+		}
+	public:
 		uint64_t Size() const { return m_List.Size(); }
 
 		bool IsEmpty()

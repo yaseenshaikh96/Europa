@@ -239,7 +239,7 @@ namespace EuropaEngine
 		}
 		void DeepCopy(const LinkedList<t_Type>& other)
 		{
-			Delete();
+			DeepDelete();
 
 			const LinkedListNode<t_Type>* next = other.m_Head;
 			while (next)
@@ -248,13 +248,20 @@ namespace EuropaEngine
 				next = next->GetNext();
 			}
 		}
+		void ShallowCopy(const LinkedList<t_Type>& other)
+		{
+			DeepDelete();
+			m_Head = other.m_Head;
+			m_Tail = other.m_Tail;
+			m_Size = other.m_Size;
+		}
 		LinkedList<t_Type>& operator=(const LinkedList<t_Type>& other)
 		{
 			if (this == &other)
 			{
 				return *this;
 			}
-			DeepCopy();
+			ShallowCopy(other);
 			return *this;
 		}
 		LinkedList(LinkedList<t_Type>&& other) noexcept
@@ -272,7 +279,7 @@ namespace EuropaEngine
 			other.m_Tail = nullptr;
 			other.m_Size = 0;
 		}
-		void Delete()
+		void DeepDelete()
 		{
 			if (!m_Head)
 			{
@@ -290,9 +297,15 @@ namespace EuropaEngine
 			m_Tail = nullptr;
 			m_Size = 0;
 		}
+		void ShallowDelete()
+		{
+			m_Head = nullptr;
+			m_Tail = nullptr;
+			m_Size = 0;
+		}
 		~LinkedList()
 		{
-			Delete();
+			DeepDelete();
 		}
 	
 	public:
@@ -320,34 +333,37 @@ namespace EuropaEngine
 			if (m_Size == 1)
 			{
 				t_Type temp(std::move(m_Head->Data()));
-				Delete();
+				DeepDelete();
+				m_Size=0;
 				return std::move(temp);
 			}
 			if (iter == begin())
 			{
-				t_Type temp(std::move(m_Head->Data()));
-				m_Head = m_Head->GetNext();
-				delete m_Head->GetPrev();
-				m_Head->SetPrev(nullptr);
-				if (m_Size == 2)
-				{
-					m_Tail = m_Head;
-				}
-				return std::move(temp);
+				return std::move(InternalRemoveAtBegin());
 			}
 			if (iter == end())
 			{
-				t_Type temp(std::move(m_Tail->Data()));
-				m_Tail = m_Tail->GetPrev();
-				delete m_Tail->GetNext();
-				m_Tail->SetNext(nullptr);
-				if (m_Size == 2)
-				{
-					m_Tail = m_Head;
-				}
-				return std::move(temp);
+				return std::move(InternalRemoveAtEnd());
 			}
+			return std::move(InternalRemoveAtMiddle(iter));
+		}
 
+	private:
+		t_Type&& InternalRemoveAtBegin()
+		{
+			t_Type temp(std::move(m_Head->Data()));
+			m_Head = m_Head->GetNext();
+			delete m_Head->GetPrev();
+			m_Head->SetPrev(nullptr);
+			if (m_Size == 2)
+			{
+				m_Tail = m_Head;
+			}
+			m_Size--;
+			return std::move(temp);
+		}
+		void InternalRemoveAtMiddle(Iterator iter)
+		{
 			LinkedListNode<t_Type>* nodeToDelete = iter.Get();
 			LinkedListNode<t_Type>* previous = nodeToDelete->GetPrev();
 			LinkedListNode<t_Type>* next = nodeToDelete->GetNext();
@@ -358,8 +374,19 @@ namespace EuropaEngine
 			delete nodeToDelete;
 			return std::move(temp);
 		}
-
-	private:
+		void InternalRemoveAtEnd()
+		{
+			t_Type temp(std::move(m_Tail->Data()));
+			m_Tail = m_Tail->GetPrev();
+			delete m_Tail->GetNext();
+			m_Tail->SetNext(nullptr);
+			if (m_Size == 2)
+			{
+				m_Tail = m_Head;
+			}
+			m_Size--;
+			return std::move(temp);
+		}
 		void InternalAddAtBegin(LinkedListNode<t_Type>* newNode)
 		{
 
@@ -441,7 +468,7 @@ namespace EuropaEngine
 		{
 			if (iter == end())
 			{
-				return iter->Data();
+				return m_Tail->Data();
 			}
 			return iter->Data();
 		}

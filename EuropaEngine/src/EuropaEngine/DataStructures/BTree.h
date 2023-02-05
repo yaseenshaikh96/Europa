@@ -57,22 +57,112 @@ namespace EuropaEngine
 	/************************************************************************************************************************************************/
 	/* Iterators */
 	/************************************************************************************************************************************************/
-	template<typename t_BTree>
-	class BTreeBaseIterator
-	{
-		// need stack
-	};
-	template<typename t_BTree>
-	class BTreeIterator : public BTreeBaseIterator<t_BTree>
-	{
-
-	};
-	template<typename t_BTree>
-	class BTreeConstIterator : public BTreeBaseIterator<t_BTree>
-	{
-
-	};
-
+	
+	//template<typename t_BTree>
+	//class BTreeBaseIterator
+	//{
+	//	using t_ValueType = typename t_BTree::t_ValueType;
+	//	using t_ValuePointerType = typename t_ValueType*;
+	//	using t_ValueReferenceType = typename t_ValueType&;
+	//
+	//	using t_NodeType = typename t_BTree::t_NodeType;
+	//	using t_NodePointerType = typename t_NodeType*;
+	//	using t_NodeReferenceType = typename t_NodeType&;
+	//
+	//public:
+	//	BTreeBaseIterator(const Stack<t_NodePointerType>& stack)
+	//		:
+	//		m_Stack(stack)
+	//	{}
+	//	/*
+	//	BTreeBaseIterator& operator+=(uint64_t offSet)
+	//	{
+	//		while (offSet != 0)
+	//		{
+	//			offSet--;
+	//			m_Ptr = m_Ptr->GetNext();
+	//		}
+	//		return *this;
+	//	}
+	//	*/
+	//	BTreeBaseIterator& operator++()
+	//	{
+	//		m_Ptr = m_Ptr->GetNext();
+	//		return *this;
+	//	}
+	//	BTreeBaseIterator operator++(int)
+	//	{
+	//		BTreeBaseIterator iterator = *this;
+	//		++(*this);
+	//		return iterator;
+	//	}
+	//	/*
+	//	BTreeBaseIterator& operator-=(uint64_t offSet)
+	//	{
+	//		while (offSet != 0)
+	//		{
+	//			offSet--;
+	//			m_Ptr = m_Ptr->GetPrev();
+	//		}
+	//		return *this;
+	//	}
+	//	*/
+	//	BTreeBaseIterator& operator--()
+	//	{
+	//		m_Ptr = m_Ptr->GetPrev();
+	//		return *this;
+	//	}
+	//	BTreeBaseIterator operator--(int)
+	//	{
+	//		BTreeBaseIterator iterator = *this;
+	//		--(*this);
+	//		return iterator;
+	//	}
+	//	/*
+	//	t_NodePointerType operator->()
+	//	{
+	//		return m_Ptr;
+	//	}
+	//	*/
+	//
+	//	bool operator==(const BTreeBaseIterator& other)
+	//	{
+	//		if (other.m_Ptr == m_Ptr)
+	//		{
+	//			return true;
+	//		}
+	//		return false;
+	//	}
+	//	bool operator!=(const BTreeBaseIterator& other)
+	//	{
+	//		return !(*this == other);
+	//	}
+	//	/*
+	//	t_ValueType& operator*()
+	//	{
+	//		return m_Ptr->Data();
+	//	}
+	//
+	//	t_NodePointerType Get()
+	//	{
+	//		return m_Ptr;
+	//	}
+	//	*/
+	//
+	//private:
+	//	Stack<t_NodePointerType> stack;
+	//};
+	//template<typename t_BTree>
+	//class BTreeIterator : public BTreeBaseIterator<t_BTree>
+	//{
+	//
+	//};
+	//template<typename t_BTree>
+	//class BTreeConstIterator : public BTreeBaseIterator<t_BTree>
+	//{
+	//
+	//};
+	
 	/************************************************************************************************************************************************/
 	/* BTree */
 	/************************************************************************************************************************************************/
@@ -84,9 +174,10 @@ namespace EuropaEngine
 
 		using t_NodeType = BTreeNode<t_Type>;
 		using t_NodeTypeConst = const BTreeNode<t_Type>;
-
+		/*
 		using Iterator = BTreeIterator<BTree<t_Type>>;
 		using ConstIterator = BTreeConstIterator<BTree<t_Type>>;
+		*/
 
 	public:
 		BTree()

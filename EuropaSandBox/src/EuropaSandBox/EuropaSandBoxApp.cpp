@@ -16,8 +16,19 @@ namespace EuropaSandBox
 	{
 		using namespace EuropaEngine;
 		
-		BTree<Test> btree;
-		std::cout << btree << std::endl;
+		Stack<Test> stack1;
+		stack1.Push(Test(10));
+		stack1.Push(Test(20));
+		stack1.Push(Test(30));
+		stack1.Push(Test(40));
+
+
+		std::cout << "Stack1: " << stack1 << std::endl;
+		
+		Stack<Test> stack2(std::move(stack1));
+		
+		std::cout << "Stack1: " << stack1 << std::endl;
+		std::cout << "Stack2: " << stack2 << std::endl;
 
 
 		std::cout << "end" << std::endl;
@@ -25,6 +36,8 @@ namespace EuropaSandBox
 	}
 	void EuropaSandBoxApp::Run()
 	{
+		std::cout << "end" << std::endl;
+		std::cout << "end" << std::endl;
 
 	}
 	void EuropaSandBoxApp::Close()
