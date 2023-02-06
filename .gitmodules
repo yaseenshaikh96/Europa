@@ -1,0 +1,3 @@
+[submodule "EuropaEngine/vendor/GLFW"]
+	path = EuropaEngine/vendor/GLFW
+	url = https://github.com/yaseenshaikh96/glfw.git
