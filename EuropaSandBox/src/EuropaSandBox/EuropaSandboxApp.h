@@ -8,8 +8,6 @@ namespace EuropaSandBox
 	{
 	public:
 		EuropaSandBoxApp();
-		virtual void Run() override;
-		virtual void Close() override;
 	};
 }
 

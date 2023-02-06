@@ -8,6 +8,62 @@ namespace EuropaEngine
 	class Queue
 	{
 	public:
+		Queue() {}
+		Queue(const Queue& other)
+		{
+
+			if (this == &other)
+			{
+				return;
+			}
+			DeepCopy(other);
+		}
+		void DeepCopy(const Queue& other)
+		{
+			std::cout << "Queue DeepCopy" << std::endl;
+			DeepDelete();
+			m_List.DeepCopy(other.m_List);
+		}
+		void ShallowCopy(const Queue& other)
+		{
+			DeepDelete();
+			m_List.ShallowCopy(other.m_List);
+		}
+		Queue<t_Type>& operator=(const Queue<t_Type>& other)
+		{
+			if (this == &other)
+			{
+				return *this;
+			}
+			ShallowCopy();
+			return *this;
+		}
+		Queue(Queue<t_Type>&& other) noexcept
+		{
+			std::cout << "Queue MoveCopy" << std::endl;
+
+			if (this == &other)
+			{
+				return;
+			}
+			m_List.ShallowCopy(other.m_List);
+			other.ShallowDelete();
+		}
+
+		void ShallowDelete()
+		{
+			m_List.ShallowDelete();
+		}
+		void DeepDelete()
+		{
+			m_List.DeepDelete();
+			ShallowDelete();
+		}
+		~Queue()
+		{
+		}
+
+	public:
 		void Enqueue(const t_Type& data)
 		{
 			m_List.Add(data, m_List.end());

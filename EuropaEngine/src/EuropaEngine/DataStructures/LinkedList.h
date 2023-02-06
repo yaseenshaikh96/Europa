@@ -248,7 +248,7 @@ namespace EuropaEngine
 				next = next->GetNext();
 			}
 		}
-		void ShallowCopy(const LinkedList<t_Type>& other)
+		void ShallowCopy(LinkedList<t_Type>& other)
 		{
 			DeepDelete();
 			m_Head = other.m_Head;
@@ -270,14 +270,8 @@ namespace EuropaEngine
 			{
 				return;
 			}
-
-			m_Head = other.m_Head;
-			m_Tail = other.m_Tail;
-			m_Size = other.m_Size;
-
-			other.m_Head = nullptr;
-			other.m_Tail = nullptr;
-			other.m_Size = 0;
+			ShallowCopy(other);
+			other.ShallowDelete();
 		}
 		void DeepDelete()
 		{
@@ -293,9 +287,7 @@ namespace EuropaEngine
 				next = next->GetNext();
 				delete temp;
 			}
-			m_Head = nullptr;
-			m_Tail = nullptr;
-			m_Size = 0;
+			ShallowDelete();
 		}
 		void ShallowDelete()
 		{

@@ -11,7 +11,6 @@ namespace EuropaEngine
 		Stack() {}
 		Stack(const Stack& other)
 		{
-
 			if (this == &other)
 			{
 				return;
@@ -21,13 +20,13 @@ namespace EuropaEngine
 		void DeepCopy(const Stack& other)
 		{
 			std::cout << "Stack DeepCopy" << std::endl;
-			Delete();
+			DeepDelete();
 			m_List.DeepCopy(other.m_List);
 		}
 		void ShallowCopy(const Stack& other)
 		{
-			Delete();
-			m_List = other.m_List;
+			DeepDelete();
+			m_List.ShallowCopy(other.m_List);
 		}
 		Stack<t_Type>& operator=(const Stack<t_Type>& other)
 		{
@@ -46,16 +45,20 @@ namespace EuropaEngine
 			{
 				return;
 			}
-			m_List = other.m_List;
-			other.m_List.ShallowDelete();
+			m_List.ShallowCopy(other.m_List);
+			other.ShallowDelete();
 		}
-
-		void Delete()
+		void ShallowDelete()
 		{
+			m_List.ShallowDelete();
+		}
+		void DeepDelete()
+		{
+			m_List.DeepDelete();
+			ShallowDelete();
 		}
 		~Stack()
 		{
-			Delete();
 		}
 	public:
 		uint64_t Size() const { return m_List.Size(); }

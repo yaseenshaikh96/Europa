@@ -213,19 +213,41 @@ namespace EuropaEngine
 			{
 				return &this;
 			}
-			DeepCopy();
+			ShallowCopy();
+		}
+		BTree(BTree&& other)
+		{
+			if (this == &other)
+			{
+				return;
+			}
+			ShallowCopy(other);
+			other.ShallowDelete();
+		}
+
+		void ShallowCopy(BTree& other)
+		{
+			DeepDelete();
+			m_Root = other.m_Root;
+			m_Size = other.m_Size;
 		}
 		void DeepCopy(const BTree& other)
 		{
 			// iterator!
 		}
-		void Delete()
+		void ShallowDelete()
+		{
+			m_Root = nullptr;
+			m_Size = 0;
+		}
+		void DeepDelete()
 		{
 			delete m_Root;
+			ShallowDelete();
 		}
 		~BTree()
 		{
-			Delete();
+			DeepDelete();
 		}
 	public:
 		void Add(const t_Type& data)

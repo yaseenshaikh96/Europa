@@ -7,41 +7,27 @@
 
 #include "TestClasses/Test.h"
 
+#include "EuropaSandBox/Layers/ExampleLayer.h"
 
 namespace EuropaSandBox
 {
 	EuropaSandBoxApp::EuropaSandBoxApp()
 		:
-		Application()
+		EuropaEngine::Application("EuropaSandBox")
 	{
+		PushOverlay(EuropaEngine::CreateRef<ExampleOverlay>());
+		PushLayer(EuropaEngine::CreateRef<ExampleLayer>());
+		PushOverlay(EuropaEngine::CreateRef<ExampleOverlay2>());
+		PushLayer(EuropaEngine::CreateRef<ExampleLayer2>());
+
+
 		using namespace EuropaEngine;
-		
-		Stack<Test> stack1;
-		stack1.Push(Test(10));
-		stack1.Push(Test(20));
-		stack1.Push(Test(30));
-		stack1.Push(Test(40));
+
+		Stack<Test> stack;
+		BTree<Test> bTree;
+		LinkedList<Test> list;
+		Queue<Test> queue;
 
 
-		std::cout << "Stack1: " << stack1 << std::endl;
-		
-		Stack<Test> stack2(std::move(stack1));
-		
-		std::cout << "Stack1: " << stack1 << std::endl;
-		std::cout << "Stack2: " << stack2 << std::endl;
-
-
-		std::cout << "end" << std::endl;
-		std::cin.get();
-	}
-	void EuropaSandBoxApp::Run()
-	{
-		std::cout << "end" << std::endl;
-		std::cout << "end" << std::endl;
-
-	}
-	void EuropaSandBoxApp::Close()
-	{
-		//std::cin.get();
 	}
 }

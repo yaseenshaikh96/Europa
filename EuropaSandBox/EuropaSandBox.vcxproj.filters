@@ -26,5 +26,6 @@
   <ItemGroup>
     <ClInclude Include="src\EuropaSandBox\EuropaSandboxApp.h" />
     <ClInclude Include="src\EuropaSandBox\TestClasses\Test.h" />
+    <ClInclude Include="src\EuropaSandBox\Layers\ExampleLayer.h" />
   </ItemGroup>
 </Project>

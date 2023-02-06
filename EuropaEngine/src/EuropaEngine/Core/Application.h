@@ -9,13 +9,17 @@ namespace EuropaEngine
 	public:
 		Application(const std::string& name = "Europa Engine Application");
 
-		void PushLayer();
-		void PopLayer();
+		void PushLayer(Ref<AppLayer> layer);
+		void PopLayer(Ref<AppLayer> layer);
 
-		virtual void Run() = 0;
-		virtual void Close() = 0;
+		void PushOverlay(Ref<AppLayer> overlay);
+		void PopOverlay(Ref<AppLayer> overlay);
+
+		void Run();
+		void Close();
 	private:
-		AppLayerStack m_LayerStack;
+		bool IsRunning = true;
+		AppLayerStack m_AppLayerStack;
 		std::string m_Name;
 	};
 
