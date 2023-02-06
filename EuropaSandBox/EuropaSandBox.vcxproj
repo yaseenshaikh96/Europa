@@ -138,6 +138,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\EuropaSandBox\EuropaSandboxApp.h" />
+    <ClInclude Include="src\EuropaSandBox\Layers\ExampleLayer.h" />
+    <ClInclude Include="src\EuropaSandBox\TestClasses\Test.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="src\EuropaSandBox\EntryPoint.cpp" />
     <ClCompile Include="src\EuropaSandBox\EuropaSandBoxApp.cpp" />
   </ItemGroup>
@@ -145,11 +150,6 @@
     <ProjectReference Include="..\EuropaEngine\EuropaEngine.vcxproj">
       <Project>{2751D6FC-13B4-65A1-BC39-9E57A87B3124}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\EuropaSandBox\EuropaSandboxApp.h" />
-    <ClInclude Include="src\EuropaSandBox\Layers\ExampleLayer.h" />
-    <ClInclude Include="src\EuropaSandBox\TestClasses\Test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

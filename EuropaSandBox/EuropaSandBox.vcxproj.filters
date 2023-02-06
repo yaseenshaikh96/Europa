@@ -1,31 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="src">
-      <UniqueIdentifier>{2DAB880B-99B4-887C-2230-9F7C8E38947C}</UniqueIdentifier>
+    <Filter Include="Layers">
+      <UniqueIdentifier>{157446C0-0116-7196-EAD0-84EAD611F8E6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="src\SandBoxClient">
-      <UniqueIdentifier>{CA064240-361D-40D6-7F94-CBF7EBE9105E}</UniqueIdentifier>
+    <Filter Include="TestClasses">
+      <UniqueIdentifier>{331643D0-9FCB-BBC5-28C0-B59C9474B2C9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="vendor">
-      <UniqueIdentifier>{B3738122-9F15-ACF8-88D0-BF4C74113349}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="vendor\bin">
-      <UniqueIdentifier>{DB89C5A8-C741-07F6-3049-E0511C20A2E6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="vendor\bin\premake">
-      <UniqueIdentifier>{4F1191FB-3BF5-5151-A455-4CA490583CD3}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\EuropaSandBox\EntryPoint.cpp">
-      <Filter>src\SandBoxClient</Filter>
-    </ClCompile>
-    <ClCompile Include="src\EuropaSandBox\EuropaSandBoxApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\EuropaSandBox\EuropaSandboxApp.h" />
-    <ClInclude Include="src\EuropaSandBox\TestClasses\Test.h" />
-    <ClInclude Include="src\EuropaSandBox\Layers\ExampleLayer.h" />
+    <ClInclude Include="src\EuropaSandBox\Layers\ExampleLayer.h">
+      <Filter>Layers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EuropaSandBox\TestClasses\Test.h">
+      <Filter>TestClasses</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\EuropaSandBox\EntryPoint.cpp" />
+    <ClCompile Include="src\EuropaSandBox\EuropaSandBoxApp.cpp" />
   </ItemGroup>
 </Project>

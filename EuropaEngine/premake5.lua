@@ -1,5 +1,4 @@
 project "EuropaEngine"
-	location "EuropaEngine"
 	kind "StaticLib"
 	language "C++"
 	cppdialect "C++20"

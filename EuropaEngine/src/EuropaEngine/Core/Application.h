@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EuropaEngine/Core/AppLayer.h"
+#include "EuropaEngine/Core/Window.h"
 
 namespace EuropaEngine
 {
@@ -19,6 +20,7 @@ namespace EuropaEngine
 		void Close();
 	private:
 		bool IsRunning = true;
+		Ref<Window> m_Window;
 		AppLayerStack m_AppLayerStack;
 		std::string m_Name;
 	};

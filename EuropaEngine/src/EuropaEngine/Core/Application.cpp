@@ -5,7 +5,16 @@ namespace EuropaEngine
 {
 	Application::Application(const std::string& name)
 		: m_Name(name)
-	{}
+	{
+		WindowProps windowProps;
+		windowProps.Width = 1280;
+		windowProps.Height = 720;
+		windowProps.Title = m_Name;
+		windowProps.VSync = true;
+
+		m_Window = Window::Create(windowProps);
+		m_Window->Init();
+	}
 
 	void Application::PushLayer(Ref<AppLayer> layer)
 	{
@@ -34,6 +43,7 @@ namespace EuropaEngine
 			{
 				(*it)->OnUpdate();
 			}
+			m_Window->OnUpdate();
 		}
 	}
 

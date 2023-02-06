@@ -1,5 +1,4 @@
 project "EuropaSandBox"
-	location "EuropaSandBox"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++20"
