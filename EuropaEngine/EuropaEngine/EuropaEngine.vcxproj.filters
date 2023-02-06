@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="EuropaEngine">
+      <UniqueIdentifier>{2751D6FC-13B4-65A1-BC39-9E57A87B3124}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EuropaEngine\Core">
+      <UniqueIdentifier>{DF45E3C2-4B5C-E158-94D3-6C7A0029B2E0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EuropaEngine\DataStructures">
+      <UniqueIdentifier>{F4C0A3BE-60CE-D1A4-E9B4-CD8F55C19D5B}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\EuropaEngine.h" />
+    <ClInclude Include="..\src\EuropaEngine\Core\AppLayer.h">
+      <Filter>EuropaEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EuropaEngine\Core\Application.h">
+      <Filter>EuropaEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EuropaEngine\Core\Defines.h">
+      <Filter>EuropaEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EuropaEngine\Core\EntryPoint.h">
+      <Filter>EuropaEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EuropaEngine\DataStructures\BTree.h">
+      <Filter>EuropaEngine\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EuropaEngine\DataStructures\LinkedList.h">
+      <Filter>EuropaEngine\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EuropaEngine\DataStructures\Queue.h">
+      <Filter>EuropaEngine\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EuropaEngine\DataStructures\Stack.h">
+      <Filter>EuropaEngine\DataStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\EuropaEnginePCH.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\EuropaEngine\Core\AppLayer.cpp">
+      <Filter>EuropaEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EuropaEngine\Core\Application.cpp">
+      <Filter>EuropaEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\EuropaEnginePCH.cpp" />
+  </ItemGroup>
+</Project>
