@@ -15,19 +15,11 @@ namespace EuropaSandBox
 		:
 		EuropaEngine::Application("EuropaSandBox")
 	{
+		/*
 		PushOverlay(EuropaEngine::CreateRef<ExampleOverlay>());
 		PushLayer(EuropaEngine::CreateRef<ExampleLayer>());
 		PushOverlay(EuropaEngine::CreateRef<ExampleOverlay2>());
 		PushLayer(EuropaEngine::CreateRef<ExampleLayer2>());
-
-
-		using namespace EuropaEngine;
-
-		Stack<Test> stack;
-		BTree<Test> bTree;
-		LinkedList<Test> list;
-		Queue<Test> queue;
-
-
+		*/
 	}
 }

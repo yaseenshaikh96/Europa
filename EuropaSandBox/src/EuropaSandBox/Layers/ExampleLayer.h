@@ -14,15 +14,15 @@ namespace EuropaSandBox
 
 		virtual void OnAttach() override
 		{
-			EUROPA_LOG_INFO("ExampleLayer OnAttach");
+			EUROPA_INFO("ExampleLayer OnAttach");
 		}
 		virtual void OnDetach() override
 		{
-			EUROPA_LOG_INFO("ExampleLayer OnDetach");
+			EUROPA_INFO("ExampleLayer OnDetach");
 		}
 		virtual void OnUpdate() override
 		{
-			EUROPA_LOG_INFO("ExampleLayer OnUpdate");
+			EUROPA_INFO("ExampleLayer OnUpdate");
 		}
 	};
 
@@ -36,15 +36,15 @@ namespace EuropaSandBox
 
 		virtual void OnAttach() override
 		{
-			EUROPA_LOG_INFO("ExampleLayer2 OnAttach");
+			EUROPA_INFO("ExampleLayer2 OnAttach");
 		}
 		virtual void OnDetach() override
 		{
-			EUROPA_LOG_INFO("ExampleLayer2 OnDetach");
+			EUROPA_INFO("ExampleLayer2 OnDetach");
 		}
 		virtual void OnUpdate() override
 		{
-			EUROPA_LOG_INFO("ExampleLayer2 OnUpdate");
+			EUROPA_INFO("ExampleLayer2 OnUpdate");
 		}
 	};
 
@@ -58,15 +58,15 @@ namespace EuropaSandBox
 
 		virtual void OnAttach() override
 		{
-			EUROPA_LOG_INFO("ExampleOverlay OnAttach");
+			EUROPA_INFO("ExampleOverlay OnAttach");
 		}
 		virtual void OnDetach() override
 		{
-			EUROPA_LOG_INFO("ExampleOverlay OnDetach");
+			EUROPA_INFO("ExampleOverlay OnDetach");
 		}
 		virtual void OnUpdate() override
 		{
-			EUROPA_LOG_INFO("ExampleOverlay OnUpdate");
+			EUROPA_INFO("ExampleOverlay OnUpdate");
 		}
 	};
 
@@ -80,15 +80,15 @@ namespace EuropaSandBox
 
 		virtual void OnAttach() override
 		{
-			EUROPA_LOG_INFO("ExampleOverlay2 OnAttach");
+			EUROPA_INFO("ExampleOverlay2 OnAttach");
 		}
 		virtual void OnDetach() override
 		{
-			EUROPA_LOG_INFO("ExampleOverlay2 OnDetach");
+			EUROPA_INFO("ExampleOverlay2 OnDetach");
 		}
 		virtual void OnUpdate() override
 		{
-			EUROPA_LOG_INFO("ExampleOverlay2 OnUpdate");
+			EUROPA_INFO("ExampleOverlay2 OnUpdate");
 		}
 	};
 }

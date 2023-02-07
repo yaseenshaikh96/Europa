@@ -21,7 +21,9 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 
 group "Dependencies"
+	include "EuropaEngine/vendor/glad"
 	include "EuropaEngine/vendor/GLFW"
+	include "EuropaEngine/vendor/spdlog"
 group ""
 
 

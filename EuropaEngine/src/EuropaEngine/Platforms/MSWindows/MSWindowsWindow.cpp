@@ -1,6 +1,7 @@
 #include "EuropaEnginePCH.h"
 #include "MSWindowsWindow.h"
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace EuropaEngine
@@ -28,10 +29,26 @@ namespace EuropaEngine
 			m_WindowProps.IsInitialized = true;
 		}
 		m_WindowProps.Window = (void*)glfwCreateWindow((int)m_WindowProps.Width, (int)m_WindowProps.Height, m_WindowProps.Title.c_str(), nullptr, nullptr);
+		
+		glfwMakeContextCurrent((GLFWwindow*)m_WindowProps.Window);
 
 		glfwSetWindowUserPointer((GLFWwindow*)m_WindowProps.Window, &m_WindowProps);
 	
 		SetVSync(true);
+
+
+		int version = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		if (version == 0) {
+			printf("Failed to initialize OpenGL context\n");
+		}
+
+		// Successfully loaded OpenGL
+		int minorVersion;
+		int majorVersion;
+		glGetIntegerv(GL_MAJOR_VERSION, &majorVersion);
+		glGetIntegerv(GL_MINOR_VERSION, &minorVersion);
+		EUROPA_CORE_INFO("OpenGL version: MAJOR: {0}, MINOR: {1}", majorVersion, minorVersion);
+		EUROPA_CORE_INFO("OpenGL minimum version: MAJOR: 3, MINOR: 3");
 
 		SetCallBacks();
 	}

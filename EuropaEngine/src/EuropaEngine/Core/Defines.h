@@ -1,19 +1,16 @@
 #pragma once
 
-#include <iostream>
+#include "EuropaEngine/Core/Logger.h"
 
 #ifdef EUROPA_ENGINE_DEBUG
 #define EUROPA_ENABLE_ASSERTS
 #endif
 
 #ifdef EUROPA_ENABLE_ASSERTS
-#define EUROPA_ASSERT(x, ...) { if(!(x)) { std::cout << "Assertion Failed: " << __VA_ARGS__ << std::endl; __debugbreak(); } }
+#define EUROPA_ASSERT(x, ...) { if(!(x)) { EUROPA_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #else
 #define EUROPA_ASSERT(X, ...)
 #endif
-
-#define EUROPA_LOG_INFO(...) std::cout << "Europa Log Info: " << __VA_ARGS__ << std::endl;
-
 
 
 namespace EuropaEngine

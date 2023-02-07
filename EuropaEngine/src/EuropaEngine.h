@@ -2,10 +2,12 @@
 
 #include "EuropaEnginePCH.h"
 
-#include "EuropaEngine/Core/Application.h"
 
+#include "EuropaEngine/Core/Logger.h"
 #include "EuropaEngine/Core/Defines.h"
 #include "EuropaEngine/Core/KeyCodes.h"
+
+#include "EuropaEngine/Core/Application.h"
 
 /* Events */
 #include "EuropaEngine/Core/Events/Event.h"

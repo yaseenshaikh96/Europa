@@ -23,12 +23,16 @@ project "EuropaEngine"
 	includedirs
 	{
 		"src",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.glad}",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.spdlog}"
 	}
 
 	links
 	{
-		"GLFW"
+		"glad",
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"

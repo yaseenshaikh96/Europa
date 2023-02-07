@@ -7,8 +7,17 @@
     <Filter Include="EuropaEngine\Core">
       <UniqueIdentifier>{DF45E3C2-4B5C-E158-94D3-6C7A0029B2E0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="EuropaEngine\Core\Events">
+      <UniqueIdentifier>{E3C0B19C-CFE5-001D-F830-E6ACE4B4FF3A}</UniqueIdentifier>
+    </Filter>
     <Filter Include="EuropaEngine\DataStructures">
       <UniqueIdentifier>{F4C0A3BE-60CE-D1A4-E9B4-CD8F55C19D5B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EuropaEngine\Platforms">
+      <UniqueIdentifier>{2EF54438-1AEF-6D8A-035C-049BEFF4D3F6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EuropaEngine\Platforms\MSWindows">
+      <UniqueIdentifier>{E8021294-D453-FDD5-FDB7-EB97E967903F}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -25,6 +34,27 @@
     <ClInclude Include="src\EuropaEngine\Core\EntryPoint.h">
       <Filter>EuropaEngine\Core</Filter>
     </ClInclude>
+    <ClInclude Include="src\EuropaEngine\Core\Events\ApplicationEvent.h">
+      <Filter>EuropaEngine\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EuropaEngine\Core\Events\Event.h">
+      <Filter>EuropaEngine\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EuropaEngine\Core\Events\KeyEvent.h">
+      <Filter>EuropaEngine\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EuropaEngine\Core\Events\MouseEvent.h">
+      <Filter>EuropaEngine\Core\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EuropaEngine\Core\KeyCodes.h">
+      <Filter>EuropaEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EuropaEngine\Core\Logger.h">
+      <Filter>EuropaEngine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EuropaEngine\Core\Window.h">
+      <Filter>EuropaEngine\Core</Filter>
+    </ClInclude>
     <ClInclude Include="src\EuropaEngine\DataStructures\BTree.h">
       <Filter>EuropaEngine\DataStructures</Filter>
     </ClInclude>
@@ -37,14 +67,10 @@
     <ClInclude Include="src\EuropaEngine\DataStructures\Stack.h">
       <Filter>EuropaEngine\DataStructures</Filter>
     </ClInclude>
+    <ClInclude Include="src\EuropaEngine\Platforms\MSWindows\MSWindowsWindow.h">
+      <Filter>EuropaEngine\Platforms\MSWindows</Filter>
+    </ClInclude>
     <ClInclude Include="src\EuropaEnginePCH.h" />
-    <ClInclude Include="src\EuropaEngine\Core\Window.h" />
-    <ClInclude Include="src\EuropaEngine\Platforms\MSWindows\MSWindowsWindow.h" />
-    <ClInclude Include="src\EuropaEngine\Core\Events\Event.h" />
-    <ClInclude Include="src\EuropaEngine\Core\Events\ApplicationEvent.h" />
-    <ClInclude Include="src\EuropaEngine\Core\Events\KeyEvent.h" />
-    <ClInclude Include="src\EuropaEngine\Core\Events\MouseEvent.h" />
-    <ClInclude Include="src\EuropaEngine\Core\KeyCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EuropaEngine\Core\AppLayer.cpp">
@@ -53,7 +79,12 @@
     <ClCompile Include="src\EuropaEngine\Core\Application.cpp">
       <Filter>EuropaEngine\Core</Filter>
     </ClCompile>
+    <ClCompile Include="src\EuropaEngine\Core\Logger.cpp">
+      <Filter>EuropaEngine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EuropaEngine\Platforms\MSWindows\MSWindowsWindow.cpp">
+      <Filter>EuropaEngine\Platforms\MSWindows</Filter>
+    </ClCompile>
     <ClCompile Include="src\EuropaEnginePCH.cpp" />
-    <ClCompile Include="src\EuropaEngine\Platforms\MSWindows\MSWindowsWindow.cpp" />
   </ItemGroup>
 </Project>

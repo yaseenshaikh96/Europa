@@ -14,6 +14,7 @@
 #include <unordered_set>
 
 
+#include "EuropaEngine/Core/Logger.h"
 #include "EuropaEngine/Core/Defines.h"
 #include "EuropaEngine/Core/KeyCodes.h"
 
