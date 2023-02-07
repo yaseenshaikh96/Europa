@@ -1,3 +1,6 @@
 [submodule "EuropaEngine/vendor/GLFW"]
 	path = EuropaEngine/vendor/GLFW
 	url = https://github.com/yaseenshaikh96/glfw.git
+[submodule "EuropaEngine/vendor/spdlog"]
+	path = EuropaEngine/vendor/spdlog
+	url = https://github.com/yaseenshaikh96/spdlog.git
