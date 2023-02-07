@@ -11,7 +11,27 @@ namespace EuropaEngine
 		MSWindowsWindow(const WindowProps& windowProps);
 		virtual ~MSWindowsWindow();
 
-		virtual void OnUpdate() override;
+
 		virtual void Init() override;
+		virtual void OnUpdate() override;
+		virtual void ShutDown() override;
+
+
+		virtual void* GetNativeWindow() override { return m_WindowProps.Window; }
+
+
+		virtual uint32_t GetWidth() const override { return m_WindowProps.Width; }
+		virtual uint32_t GetHeight() const override { return m_WindowProps.Height; }
+
+		virtual bool GetVSync() const override { return m_WindowProps.VSync; }
+		virtual void SetVSync(bool enable) override;
+
+		void SetEventCallBackFunction(std::function<void(Event&)> function) override { m_WindowProps.EventCallBackFunction = function; }
+	
+	private:
+		void SetCallBacks();
+
+	private:
+		WindowProps m_WindowProps;
 	};
 }

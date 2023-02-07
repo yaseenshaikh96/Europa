@@ -143,7 +143,11 @@
     <ClInclude Include="src\EuropaEngine\Core\Application.h" />
     <ClInclude Include="src\EuropaEngine\Core\Defines.h" />
     <ClInclude Include="src\EuropaEngine\Core\EntryPoint.h" />
+    <ClInclude Include="src\EuropaEngine\Core\Events\ApplicationEvent.h" />
     <ClInclude Include="src\EuropaEngine\Core\Events\Event.h" />
+    <ClInclude Include="src\EuropaEngine\Core\Events\KeyEvent.h" />
+    <ClInclude Include="src\EuropaEngine\Core\Events\MouseEvent.h" />
+    <ClInclude Include="src\EuropaEngine\Core\KeyCodes.h" />
     <ClInclude Include="src\EuropaEngine\Core\Window.h" />
     <ClInclude Include="src\EuropaEngine\DataStructures\BTree.h" />
     <ClInclude Include="src\EuropaEngine\DataStructures\LinkedList.h" />

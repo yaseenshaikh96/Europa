@@ -41,6 +41,10 @@
     <ClInclude Include="src\EuropaEngine\Core\Window.h" />
     <ClInclude Include="src\EuropaEngine\Platforms\MSWindows\MSWindowsWindow.h" />
     <ClInclude Include="src\EuropaEngine\Core\Events\Event.h" />
+    <ClInclude Include="src\EuropaEngine\Core\Events\ApplicationEvent.h" />
+    <ClInclude Include="src\EuropaEngine\Core\Events\KeyEvent.h" />
+    <ClInclude Include="src\EuropaEngine\Core\Events\MouseEvent.h" />
+    <ClInclude Include="src\EuropaEngine\Core\KeyCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\EuropaEngine\Core\AppLayer.cpp">

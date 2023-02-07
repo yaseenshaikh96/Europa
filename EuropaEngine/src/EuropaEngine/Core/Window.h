@@ -14,34 +14,28 @@ namespace EuropaEngine
 		std::string Title;
 		uint32_t Width = 0, Height = 0;
 		
-		std::function<void(Event&)> EventCallBack;
+		std::function<void(Event&)> EventCallBackFunction;
 	};
 
 	class Window
 	{
-	protected:
-		Window(const WindowProps& windowProps)
-			:
-			m_WindowProps(windowProps)
-		{}
-
 	public:
 		static Ref<Window> Create(const WindowProps& windowProps);
 		virtual ~Window() = default;
 
 		virtual void Init() = 0;
+		virtual void ShutDown() = 0;
 		virtual void OnUpdate() = 0;
-		virtual void* GetNativeWindow() { return m_WindowProps.Window; }
 
+		virtual void* GetNativeWindow() = 0;
 
-		uint32_t GetWidth() const { return m_WindowProps.Width; }
-		uint32_t GetHeight() const { return m_WindowProps.Height; }
+		virtual uint32_t GetWidth() const = 0;
+		virtual uint32_t GetHeight() const = 0;
 
-		bool GetVSync() const { return m_WindowProps.VSync; }
+		virtual bool GetVSync() const = 0;
+		virtual void SetVSync(bool enable)  = 0;
+
 		
-		void SetEventCallBackFunction(std::function<void(Event&)> function) { m_WindowProps.EventCallBack = function; }
-
-	protected:
-		WindowProps m_WindowProps;
+		virtual void SetEventCallBackFunction(std::function<void(Event&)> function) = 0;
 	};
 }

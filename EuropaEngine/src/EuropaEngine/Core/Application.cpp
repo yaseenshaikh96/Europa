@@ -3,6 +3,7 @@
 
 namespace EuropaEngine
 {
+
 	Application::Application(const std::string& name)
 		: m_Name(name)
 	{
@@ -11,6 +12,7 @@ namespace EuropaEngine
 		windowProps.Height = 720;
 		windowProps.Title = m_Name;
 		windowProps.VSync = true;
+		windowProps.EventCallBackFunction = BIND_EVENT_FUNCTION(Application::OnEvent, this);
 
 		m_Window = Window::Create(windowProps);
 		m_Window->Init();
@@ -35,10 +37,8 @@ namespace EuropaEngine
 	
 	void Application::Run()
 	{
-		while (IsRunning)
+		while (m_IsRunning)
 		{
-			IsRunning = false;
-
 			for (auto it = m_AppLayerStack.rbegin(); it != m_AppLayerStack.rend(); it++)
 			{
 				(*it)->OnUpdate();
@@ -49,8 +49,21 @@ namespace EuropaEngine
 
 	void Application::Close()
 	{
-		EUROPA_LOG_INFO("Application::Close");
-		std::cin.get();
+		m_Window->ShutDown();
 	}
 
+	/************************************************************************************************************************/
+	/* Events */
+	void Application::OnEvent(Event& e)
+	{
+		EventDispatcher eventDispacther(e);
+
+		eventDispacther.Dispatch<WindowCloseEvent>(BIND_EVENT_FUNCTION(Application::OnWindowCloseEvent, this));
+	}
+
+	bool Application::OnWindowCloseEvent(WindowCloseEvent& e)
+	{
+		m_IsRunning = false;
+		return true;
+	}
 }

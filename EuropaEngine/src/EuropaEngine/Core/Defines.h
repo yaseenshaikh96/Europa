@@ -18,6 +18,8 @@
 
 namespace EuropaEngine
 {
+#define BIND_EVENT_FUNCTION(x, instance) std::bind(&x, instance, std::placeholders::_1)
+
 	template<typename t_Type>
 	using Scope = std::unique_ptr<t_Type>;
 	

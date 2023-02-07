@@ -18,8 +18,11 @@ namespace EuropaEngine
 
 		void Run();
 		void Close();
+
+		void OnEvent(Event& e);
+		bool OnWindowCloseEvent(WindowCloseEvent& e);
 	private:
-		bool IsRunning = true;
+		bool m_IsRunning = true;
 		Ref<Window> m_Window;
 		AppLayerStack m_AppLayerStack;
 		std::string m_Name;
