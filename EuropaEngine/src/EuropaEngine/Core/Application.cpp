@@ -1,12 +1,17 @@
 #include "EuropaEnginePCH.h"
 #include "Application.h"
 
+#include <glad/glad.h>
+
 namespace EuropaEngine
 {
+	Application* Application::s_Instance = nullptr;
 
 	Application::Application(const std::string& name)
 		: m_Name(name)
 	{
+		s_Instance = this;
+
 		Logger::Init();
 
 		WindowProps windowProps;
@@ -18,9 +23,8 @@ namespace EuropaEngine
 		m_Window = Window::Create(windowProps);
 		m_Window->Init();
 		
-
-
-
+		m_ImguiLayer = CreateRef<ImguiLayer>();
+		PushOverlay(m_ImguiLayer);
 	}
 
 	void Application::PushLayer(Ref<AppLayer> layer)
@@ -44,11 +48,21 @@ namespace EuropaEngine
 	{
 		while (m_IsRunning)
 		{
-			//std::cout << "update\n";
+			glClearColor(0.4, 0.01, 0.5, 1.0);
+			glClear(GL_COLOR_BUFFER_BIT);
+
 			for (auto it = m_AppLayerStack.rbegin(); it != m_AppLayerStack.rend(); it++)
 			{
 				(*it)->OnUpdate();
 			}
+
+			m_ImguiLayer->Begin();
+			for (auto it = m_AppLayerStack.rbegin(); it != m_AppLayerStack.rend(); it++)
+			{
+				(*it)->OnImguiRender();
+			}
+			m_ImguiLayer->End();
+			
 			m_Window->OnUpdate();
 		}
 	}

@@ -35,7 +35,6 @@ namespace EuropaEngine
 		virtual bool GetVSync() const = 0;
 		virtual void SetVSync(bool enable)  = 0;
 
-		
 		virtual void SetEventCallBackFunction(std::function<void(Event&)> function) = 0;
 	};
 }

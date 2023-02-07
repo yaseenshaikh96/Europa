@@ -56,6 +56,7 @@ namespace EuropaEngine
 	void MSWindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
+		glfwSwapBuffers((GLFWwindow*)m_WindowProps.Window);
 	}
 
 	void MSWindowsWindow::ShutDown()

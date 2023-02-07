@@ -1,40 +1,29 @@
-project "EuropaEngine"
-	kind "StaticLib"
+project "EuropaEditor"
+	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++20"
 	staticruntime "on"
-
+	
 	targetdir ( "%{wks.location}/bin/" .. outputdir .. "/%{prj.name}")
 	objdir ( "%{wks.location}/bin-int/" .. outputdir .. "/%{prj.name}")
-
-	pchheader "EuropaEnginePCH.h"
-	pchsource "src/EuropaEnginePCH.cpp"
 
 	files
 	{
 		"src/**.h",
-		"src/**.cpp",
-	}
-
-	defines
-	{
+		"src/**.cpp"
 	}
 
 	includedirs
 	{
 		"src",
-		"%{IncludeDir.glad}",
-		"%{IncludeDir.GLFW}",
-		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.imgui}"
+        "%{wks.location}/EuropaEngine/src",
+		"%{wks.location}/EuropaEngine/vendor",
+		"%{IncludeDir.spdlog}"
 	}
 
 	links
 	{
-		"glad",
-		"GLFW",
-		"opengl32.lib",
-		"imgui"
+		"EuropaEngine"
 	}
 
 	filter "system:windows"
@@ -48,16 +37,16 @@ project "EuropaEngine"
 		}
 
 	filter "configurations:Debug"
-		defines "EUROPA_ENGINE_DEBUG"
-		runtime "Debug"
+		defines "EUROPA_DEBUG"
+		runtime "Debug" 
 		symbols "on"
 
 	filter "configurations:Release"
-		defines "EUROPA_ENGINE_RELEASE"
+		defines "EUROPA_RELEASE"
 		runtime "Release"
 		optimize "on"
 
 	filter "configurations:Dist"
-		defines "EUROPA_ENGINE_DIST"
+		defines "EUROPA_DIST"
 		runtime "Release"
 		optimize "on"

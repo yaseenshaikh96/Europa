@@ -16,9 +16,7 @@ namespace EuropaEngine
 		virtual void OnUpdate() override;
 		virtual void ShutDown() override;
 
-
 		virtual void* GetNativeWindow() override { return m_WindowProps.Window; }
-
 
 		virtual uint32_t GetWidth() const override { return m_WindowProps.Width; }
 		virtual uint32_t GetHeight() const override { return m_WindowProps.Height; }

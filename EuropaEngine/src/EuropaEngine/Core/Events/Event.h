@@ -45,8 +45,8 @@ namespace EuropaEngine
 			return (GetCategoryFlags() & category) > 0;
 		}
 
-	protected:
-		bool m_Handled;
+	public:
+		bool Handled;
 	};
 
 
@@ -65,7 +65,7 @@ namespace EuropaEngine
 		{
 			if (m_Event.GetEventType() == t_EventType::GetStaticType())
 			{
-				m_Event.m_Handled = func(*(t_EventType*)&m_Event);
+				m_Event.Handled = func(*(t_EventType*)&m_Event);
 				return true;
 			}
 			return false;

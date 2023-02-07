@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 
+#include "EuropaEngine/Core/Events/Event.h"
 #include "EuropaEngine/Core/Defines.h"
 
 namespace EuropaEngine
@@ -20,9 +21,13 @@ namespace EuropaEngine
 		{}
 		virtual ~AppLayer() = default;
 
-		virtual void OnAttach() = 0;
-		virtual void OnDetach() = 0;
-		virtual void OnUpdate() = 0;
+		virtual void OnAttach() {}
+		virtual void OnDetach() {}
+		virtual void OnUpdate() {}
+
+		virtual void OnImguiRender() {}
+
+		virtual void OnEvent(Event& e) = 0;
 	private:
 		std::string m_Name;
 	};

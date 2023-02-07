@@ -2,7 +2,7 @@ include "premake5Dependencies.lua"
 
 workspace "Europa"
 	architecture "x64"
-	startproject "EuropaSandBox"
+	startproject "EuropaEditor"
 
 	configurations
 	{
@@ -20,15 +20,17 @@ workspace "Europa"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 
-group "Dependencies"
+group "Core-Dependencies"
 	include "EuropaEngine/vendor/glad"
 	include "EuropaEngine/vendor/GLFW"
 	include "EuropaEngine/vendor/spdlog"
+	include "EuropaEngine/vendor/imgui"
 group ""
 
 
 group "Core"
 	include "EuropaEngine"
+	include "EuropaEditor"
 group ""
 
 group "Misc"
