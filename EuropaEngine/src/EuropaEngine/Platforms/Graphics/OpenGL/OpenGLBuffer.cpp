@@ -1,16 +1,16 @@
-#include "CallistoPCH.h"
+#include "EuropaEnginePCH.h"
 #include "OpenGLBuffer.h"
 
 #include <glad/glad.h>
 
-namespace Callisto
+namespace EuropaEngine
 {
 	/**************************************************************************************************************************************************/
 	/* VertexBuffer */
 	/**************************************************************************************************************************************************/
 	OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size)
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		glGenBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
@@ -18,7 +18,7 @@ namespace Callisto
 	}
 	OpenGLVertexBuffer::OpenGLVertexBuffer(float* vertices, uint32_t size)
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		glGenBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
@@ -26,7 +26,7 @@ namespace Callisto
 	}
 	OpenGLVertexBuffer::~OpenGLVertexBuffer()
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		glDeleteBuffers(1, &m_RendererID);
 	}
@@ -39,13 +39,13 @@ namespace Callisto
 
 	void OpenGLVertexBuffer::Bind() const
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_RendererID);
 	}
 	void OpenGLVertexBuffer::UnBind() const
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
@@ -57,7 +57,7 @@ namespace Callisto
 		:
 		m_Count(count)
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		glGenBuffers(1, &m_RendererID);
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
@@ -65,19 +65,19 @@ namespace Callisto
 	}
 	OpenGLIndexBuffer::~OpenGLIndexBuffer()
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		glDeleteBuffers(1, &m_RendererID);
 	}
 	void OpenGLIndexBuffer::Bind() const
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
 	}
 	void OpenGLIndexBuffer::UnBind() const
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}

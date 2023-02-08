@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Callisto/Renderer/Buffer.h>
+#include <EuropaEngine/Renderer/Buffer.h>
 
-namespace Callisto
+namespace EuropaEngine
 {
 	/**************************************************************************************************************************************************/
 	/* VertexBuffer */

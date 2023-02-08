@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Callisto/Renderer/Texture.h>
+#include <EuropaEngine/Renderer/Texture.h>
 
 #include <glad/glad.h>
 
-namespace Callisto
+namespace EuropaEngine
 {
 	class OpenGLTexture2D : public Texture2D
 	{

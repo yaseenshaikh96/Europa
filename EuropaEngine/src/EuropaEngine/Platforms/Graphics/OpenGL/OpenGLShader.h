@@ -1,11 +1,11 @@
 #pragma once
 
-#include <Callisto/Renderer/Shader.h>
+#include <EuropaEngine/Renderer/Shader.h>
 
 //REMOVE THIS
 typedef unsigned int GLenum;
 
-namespace Callisto
+namespace EuropaEngine
 {
 	class OpenGLShader : public Shader
 	{

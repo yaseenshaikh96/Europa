@@ -38,7 +38,7 @@ namespace EuropaEngine
 
 	void Renderer2D::Init()
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 
 
 		s_Data.QuadVertexArray = VertexArray::Create();
@@ -102,11 +102,11 @@ namespace EuropaEngine
 
 	void Renderer2D::Shutdown()
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 	}
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 
 		s_Data.TextureSlotSIndex = 1;
 
@@ -131,7 +131,7 @@ namespace EuropaEngine
 
 	void Renderer2D::EndScene()
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 
 		uint32_t dataSize = (uint8_t*)s_Data.QuadVertexBufferPtr - (uint8_t*)s_Data.QuadVertexBufferBase;
 		s_Data.QuadVertexBuffer->SetData(s_Data.QuadVertexBufferBase, dataSize);
@@ -166,7 +166,7 @@ namespace EuropaEngine
 	}
 	void Renderer2D::DrawRotatedQuadFilled(const glm::vec3& position, const glm::vec2& size, float rotation, glm::vec4 color)
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 			* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f))
@@ -181,7 +181,7 @@ namespace EuropaEngine
 	}
 	void Renderer2D::DrawRotatedQuadFilled(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<Texture2D>& texture, const glm::vec2& texScale, const glm::vec4& tintColor)
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 			* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f))
@@ -196,7 +196,7 @@ namespace EuropaEngine
 	}
 	void Renderer2D::DrawAxisAlignedQuadFilled(const glm::vec3& position, const glm::vec2& size, glm::vec4 color)
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
@@ -210,7 +210,7 @@ namespace EuropaEngine
 	}
 	void Renderer2D::DrawAxisAlignedQuadFilled(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, const glm::vec2& texScale, const glm::vec4& tintColor)
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
@@ -225,7 +225,7 @@ namespace EuropaEngine
 	}
 	void Renderer2D::DrawAxisAlignedQuadFilled(const glm::vec3& position, const glm::vec2& size, const Ref<SubTexture2D>& subTexture, const glm::vec2& texScale, const glm::vec4& tintColor)
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 			* glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
@@ -239,7 +239,7 @@ namespace EuropaEngine
 	}
 	void Renderer2D::DrawRotatedQuadFilled(const glm::vec3& position, const glm::vec2& size, float rotation, const Ref<SubTexture2D>& subTexture, const glm::vec2& texScale, const glm::vec4& tintColor)
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), position)
 			* glm::rotate(glm::mat4(1.0f), glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f))
@@ -250,7 +250,7 @@ namespace EuropaEngine
 
 	void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color)
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 
 		if (s_Data.QuadIndexCount >= Renderer2D::MAX_INDICES_COUNT_PER_DRAW)
 		{
@@ -284,7 +284,7 @@ namespace EuropaEngine
 
 	void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Texture2D>& texture, const glm::vec2& texScale, const glm::vec4& tintColor)
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 
 		if (s_Data.QuadIndexCount >= MAX_INDICES_COUNT_PER_DRAW)
 		{

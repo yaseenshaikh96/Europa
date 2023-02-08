@@ -1,4 +1,4 @@
-#include "CallistoPCH.h"
+#include "EuropaEnginePCH.h"
 #include "OpenGLTexture.h"
 
 #include <glad/glad.h>
@@ -7,14 +7,14 @@
 #include <stb_image.h>
 #include <glad/glad.h>
 
-namespace Callisto
+namespace EuropaEngine
 {
 	OpenGLTexture2D::OpenGLTexture2D(uint32_t width, uint32_t height)
 		:
 		m_Width(width),
 		m_Height(height)
 	{	
-		CALLISTO_PROFILE_FUNCTION();
+		
 		
 		glGenTextures(1, &m_RendererID);
 		glBindTexture(GL_TEXTURE_2D, m_RendererID);
@@ -30,16 +30,15 @@ namespace Callisto
 		:
 		m_Path(path), m_Width(0), m_Height(0), m_RendererID(0)
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		int channel, width, height;
 		stbi_set_flip_vertically_on_load(1);
 		stbi_uc* data;
 		{
-			CALLISTO_PROFILE_SCOPE("OpenGLTexture2D::OpenGLTexture2D(const std::string&)::stbi_load(...)");
 			data = stbi_load(m_Path.c_str(), &width, &height, &channel, 0);
 		}
-		CALLISTO_CORE_ASSERT(data, "Failed to load Texture2D!");
+		EUROPA_ASSERT(data, "Failed to load Texture2D!");
 		m_Width = width;
 		m_Height = height;
 
@@ -56,7 +55,7 @@ namespace Callisto
 		}
 		else
 		{
-			CALLISTO_CORE_ASSERT(false, "Only RGB and RGBA format supported!");
+			EUROPA_ASSERT(false, "Only RGB and RGBA format supported!");
 		}
 
 		m_InternalFormat = internalFormat;
@@ -82,17 +81,17 @@ namespace Callisto
 	}
 	OpenGLTexture2D::~OpenGLTexture2D()
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		glDeleteTextures(1, &m_RendererID);
 	}
 
 	void OpenGLTexture2D::SetData(void* data, uint32_t size)
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		uint32_t bytesPerPixel = m_DataFormat == GL_RGBA ? 4 : 3;
-		CALLISTO_ASSERT(size == m_Width * m_Height * bytesPerPixel, "data must be entire texture!");
+		EUROPA_ASSERT(size == m_Width * m_Height * bytesPerPixel, "data must be entire texture!");
 
 		glBindTexture(GL_TEXTURE_2D, m_RendererID);
 		glTexImage2D(GL_TEXTURE_2D, 0, m_InternalFormat, m_Width, m_Height, 0, m_DataFormat, GL_UNSIGNED_BYTE, data);
@@ -101,7 +100,7 @@ namespace Callisto
 
 	void OpenGLTexture2D::Bind(uint32_t slot) const
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 		
 		glActiveTexture(GL_TEXTURE0 + slot);
 		glBindTexture(GL_TEXTURE_2D, m_RendererID);

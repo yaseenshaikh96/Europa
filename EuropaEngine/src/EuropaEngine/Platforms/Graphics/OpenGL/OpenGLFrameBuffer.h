@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Callisto/Renderer/FrameBuffer.h>
+#include <EuropaEngine/Renderer/FrameBuffer.h>
 
-namespace Callisto
+namespace EuropaEngine
 {
 	class OpenGLFrameBuffer : public FrameBuffer
 	{

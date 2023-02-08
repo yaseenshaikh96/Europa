@@ -1,8 +1,8 @@
-#include "CallistoPCH.h"
+#include "EuropaEnginePCH.h"
 #include "OpenGLFrameBuffer.h"
 #include <glad/glad.h>
 
-namespace Callisto
+namespace EuropaEngine
 {
 	OpenGLFrameBuffer::OpenGLFrameBuffer(FrameBufferSpecification specs)
 		: m_Specs(specs)
@@ -53,7 +53,7 @@ namespace Callisto
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_TEXTURE_2D, m_DepthAttachment, 0);
 
 
-		CALLISTO_CORE_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, " FrameBuffer is incomplete!");
+		EUROPA_ASSERT(glCheckFramebufferStatus(GL_FRAMEBUFFER) == GL_FRAMEBUFFER_COMPLETE, " FrameBuffer is incomplete!");
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
 	}

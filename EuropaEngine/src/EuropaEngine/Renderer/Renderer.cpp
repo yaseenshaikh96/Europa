@@ -11,7 +11,7 @@ namespace EuropaEngine
 
 	void Renderer::Init()
 	{
-		EuropaEngine_PROFILE_FUNCTION();
+		
 		RenderCommand::Init();
 		Renderer2D::Init();
 	}

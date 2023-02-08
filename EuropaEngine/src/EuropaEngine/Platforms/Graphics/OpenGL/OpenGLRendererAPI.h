@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Callisto/Renderer/RendererAPI.h>
+#include <EuropaEngine/Renderer/RendererAPI.h>
 
-namespace Callisto
+namespace EuropaEngine
 {
 	class OpenGLRendererAPI : public RendererAPI
 	{

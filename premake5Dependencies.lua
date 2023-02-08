@@ -19,3 +19,4 @@ IncludeDir["VulkanSDK"] = "%{VULKAN_SDK}/Include"
 
 IncludeDir["imgui"] = "%{wks.location}/EuropaEngine/vendor/imgui"
 IncludeDir["glm"] = "%{wks.location}/EuropaEngine/vendor/glm"
+IncludeDir["stb"] = "%{wks.location}/EuropaEngine/vendor/stb/include"

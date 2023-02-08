@@ -1,7 +1,7 @@
 #include "EuropaEnginePCH.h"
 #include "RenderCommand.h"
 
-#include "EuropaEngine/Platforms/OpenGL/OpenGLRendererAPI.h"
+#include "EuropaEngine/Platforms/Graphics/OpenGL/OpenGLRendererAPI.h"
 
 namespace EuropaEngine
 {

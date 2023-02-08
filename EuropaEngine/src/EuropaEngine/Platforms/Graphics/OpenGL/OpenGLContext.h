@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Callisto/Renderer/GraphicsContext.h>
+#include <EuropaEngine/Renderer/GraphicsContext.h>
 
 struct GLFWwindow;
 
-namespace Callisto
+namespace EuropaEngine
 {
 	class OpenGLContext : public GraphicsContext
 	{

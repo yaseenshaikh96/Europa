@@ -1,14 +1,14 @@
-#include "CallistoPCH.h"
+#include "EuropaEnginePCH.h"
 #include "OpenGLRendererAPI.h"
 
 #include <glad/glad.h>
 
-namespace Callisto
+namespace EuropaEngine
 {
 
 	void OpenGLRendererAPI::Init()
 	{
-		CALLISTO_PROFILE_FUNCTION();
+		
 
 		glEnable(GL_BLEND);
 		glEnable(GL_DEPTH_TEST);

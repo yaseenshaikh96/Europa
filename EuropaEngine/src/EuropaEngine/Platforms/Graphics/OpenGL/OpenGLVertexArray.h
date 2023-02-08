@@ -1,8 +1,8 @@
 #pragma once
 
-#include <Callisto/Renderer/VertexArray.h>
+#include "EuropaEngine/Renderer/VertexArray.h"
 
-namespace Callisto
+namespace EuropaEngine
 {
 	class OpenGLVertexArray : public VertexArray
 	{

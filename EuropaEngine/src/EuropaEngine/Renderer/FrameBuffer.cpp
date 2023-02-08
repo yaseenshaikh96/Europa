@@ -2,7 +2,7 @@
 #include "FrameBuffer.h"
 
 #include "EuropaEngine/Renderer/RendererAPI.h"
-#include "EuropaEngine/Platforms/OpenGL/OpenGLFrameBuffer.h"
+#include "EuropaEngine/Platforms/Graphics/OpenGL/OpenGLFrameBuffer.h"
 
 namespace EuropaEngine
 {
