@@ -111,6 +111,8 @@ namespace EuropaEngine
 			RenderCommand::Clear();
 		}
 
+		m_OrthographicCameraController.OnUpdate();
+
 		//m_CubeRotation += 90 * timeStep;
 		{
 			Renderer2D::BeginScene(m_OrthographicCameraController.GetCamera());

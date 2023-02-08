@@ -28,7 +28,6 @@ project "EuropaEngine"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.spdlog}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.imgui}",
 		"%{IncludeDir.stb}"
 	}
 
@@ -36,8 +35,7 @@ project "EuropaEngine"
 	{
 		"glad",
 		"GLFW",
-		"opengl32.lib",
-		"imgui"
+		"opengl32.lib"
 	}
 
 	filter "system:windows"

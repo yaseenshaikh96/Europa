@@ -18,13 +18,17 @@ project "EuropaSandBox"
 		"src",
 		"%{wks.location}/EuropaEngine/src",
 		"%{wks.location}/EuropaEngine/vendor",
+		"%{wks.location}/EuropaEditor/src",
+		"%{wks.location}/EuropaEditor/vendor",
 		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.imgui}"
 	}
 
 	links
 	{
-		"EuropaEngine"
+		"EuropaEngine",
+		"EuropaEditor"
 	}
 
 	filter "system:windows"

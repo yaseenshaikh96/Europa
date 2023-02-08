@@ -23,10 +23,11 @@ namespace EuropaEngine
 		m_Window = Window::Create(windowProps);
 		m_Window->Init();
 		
-		m_ImguiLayer = CreateRef<ImguiLayer>();
-		PushOverlay(m_ImguiLayer);
-
 		Renderer::Init();
+		
+		if(m_EditorApplication)
+			m_EditorApplication->Init();
+
 
 		EUROPA_CORE_INFO("Appilication Initialized");
 	}
@@ -57,19 +58,18 @@ namespace EuropaEngine
 				(*it)->OnUpdate();
 			}
 
-			m_ImguiLayer->Begin();
-			for (auto it = m_AppLayerStack.rbegin(); it != m_AppLayerStack.rend(); it++)
-			{
-				(*it)->OnImguiRender();
-			}
-			m_ImguiLayer->End();
-			
+			if (m_EditorApplication)
+				m_EditorApplication->OnUIUpdate();
+
 			m_Window->OnUpdate();
 		}
 	}
 
 	void Application::Close()
 	{
+		if (m_EditorApplication)
+			m_EditorApplication->ShutDown();
+		
 		m_Window->ShutDown();
 	}
 
@@ -78,7 +78,6 @@ namespace EuropaEngine
 	void Application::OnEvent(Event& e)
 	{
 		EventDispatcher eventDispacther(e);
-
 		eventDispacther.Dispatch<WindowCloseEvent>(BIND_EVENT_FUNCTION(Application::OnWindowCloseEvent, this));
 	}
 

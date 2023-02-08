@@ -1,12 +1,5 @@
 #include "EuropaSandboxApp.h"
 
-#include <EuropaEngine/DataStructures/LinkedList.h>
-#include <EuropaEngine/DataStructures/Stack.h>
-#include <EuropaEngine/DataStructures/Queue.h>
-#include <EuropaEngine/DataStructures/BTree.h>
-
-#include "TestClasses/Test.h"
-
 #include "EuropaSandBox/Layers/ExampleLayer.h"
 
 namespace EuropaSandBox
@@ -15,11 +8,12 @@ namespace EuropaSandBox
 		:
 		EuropaEngine::Application("EuropaSandBox")
 	{
-		/*
-		PushOverlay(EuropaEngine::CreateRef<ExampleOverlay>());
-		PushLayer(EuropaEngine::CreateRef<ExampleLayer>());
-		PushOverlay(EuropaEngine::CreateRef<ExampleOverlay2>());
-		PushLayer(EuropaEngine::CreateRef<ExampleLayer2>());
-		*/
+
+		EuropaEngine::FrameBufferSpecification frameSpecs;
+		frameSpecs.Width = 1280;
+		frameSpecs.Height = 720;
+		m_FrameBuffer = EuropaEngine::FrameBuffer::Create(frameSpecs);
+		
+		EditorApp = new EuropaEngine::EuropaEditorApp(m_FrameBuffer);
 	}
 }

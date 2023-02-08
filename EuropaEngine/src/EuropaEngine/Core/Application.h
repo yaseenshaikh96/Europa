@@ -3,7 +3,7 @@
 #include "EuropaEngine/Core/AppLayer.h"
 #include "EuropaEngine/Core/Window.h"
 
-#include "EuropaEngine/Editor/imgui/ImguiLayer.h"
+#include "EuropaEngine/Editor/EditorApplication.h"
 
 namespace EuropaEngine
 {
@@ -25,7 +25,10 @@ namespace EuropaEngine
 		bool OnWindowCloseEvent(WindowCloseEvent& e);
 	
 		inline static Application& Get() { return *s_Instance; }
-		inline Ref<ImguiLayer> GetImguiLayer() { return m_ImguiLayer; }
+
+		inline EditorApplication& GetEditor() { return *m_EditorApplication; }
+		inline void SetEditor(EditorApplication* editor) { m_EditorApplication = editor; }
+		
 		inline Ref<Window> GetWindow() { return m_Window; }
 
 	private:
@@ -34,10 +37,11 @@ namespace EuropaEngine
 		AppLayerStack m_AppLayerStack;
 		std::string m_Name;
 
-		Ref<ImguiLayer> m_ImguiLayer;
 	private:
 		static Application* s_Instance;
+		EditorApplication* m_EditorApplication;
 	};
 
 	Application* CreateApplication();
+	EditorApplication* CreateEditorApplication();
 }

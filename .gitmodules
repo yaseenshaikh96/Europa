@@ -8,7 +8,7 @@
 	path = EuropaEngine/vendor/glad
 	url = https://github.com/yaseenshaikh96/glad.git
 [submodule "EuropaEditor/vendor/imgui"]
-	path = EuropaEngine/vendor/imgui
+	path = EuropaEditor/vendor/imgui
 	url = https://github.com/yaseenshaikh96/imgui.git
 [submodule "EuropaEngine/vendor/glm"]
 	path = EuropaEngine/vendor/glm

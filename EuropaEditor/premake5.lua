@@ -1,5 +1,5 @@
 project "EuropaEditor"
-	kind "ConsoleApp"
+	kind "StaticLib"
 	language "C++"
 	cppdialect "C++20"
 	staticruntime "on"
@@ -27,7 +27,8 @@ project "EuropaEditor"
 
 	links
 	{
-		"EuropaEngine"
+		"EuropaEngine",
+		"imgui"
 	}
 	
 	defines

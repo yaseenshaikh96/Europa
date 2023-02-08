@@ -17,10 +17,10 @@ IncludeDir["GLFW"] =        "%{wks.location}/EuropaEngine/vendor/GLFW/include"
 IncludeDir["glad"] =        "%{wks.location}/EuropaEngine/vendor/glad/include"
 IncludeDir["stb_image"] =   "%{wks.location}/EuropaEngine/vendor/stb_image"
 IncludeDir["spdlog"] =      "%{wks.location}/EuropaEngine/vendor/spdlog/include"
-IncludeDir["imgui"] =       "%{wks.location}/EuropaEngine/vendor/imgui"
 IncludeDir["glm"] =         "%{wks.location}/EuropaEngine/vendor/glm"
 IncludeDir["stb"] =         "%{wks.location}/EuropaEngine/vendor/stb/include"
 
+IncludeDir["imgui"] =       "%{wks.location}/EuropaEditor/vendor/imgui"
 
 GlobalDefines = {}
 GlobalDefines["stb_image"] = "STB_IMAGE_IMPLEMENTATION"
