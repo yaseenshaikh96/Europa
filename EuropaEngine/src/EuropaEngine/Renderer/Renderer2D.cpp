@@ -38,9 +38,6 @@ namespace EuropaEngine
 
 	void Renderer2D::Init()
 	{
-		
-
-
 		s_Data.QuadVertexArray = VertexArray::Create();
 		s_Data.QuadVertexBuffer = VertexBuffer::Create(MAX_VERTICES_COUNT_PER_DRAW * sizeof(QuadVertex) );
 		BufferLayout quadLayout =

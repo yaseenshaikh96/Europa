@@ -2,7 +2,7 @@
 #include "VertexArray.h"
 
 #include "Renderer.h"
-#include "EuropaEngine/Platforms/OpenGL/OpenGLVertexArray.h"
+#include "EuropaEngine/Platforms/Graphics/OpenGL/OpenGLVertexArray.h"
 
 namespace EuropaEngine
 {

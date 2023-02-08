@@ -4,9 +4,6 @@
 
 namespace EuropaEngine
 {
-
-
-
 	class OrthographicCamera
 	{
 	public:

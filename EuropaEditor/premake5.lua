@@ -17,14 +17,22 @@ project "EuropaEditor"
 	{
 		"src",
         "%{wks.location}/EuropaEngine/src",
-		"%{wks.location}/EuropaEngine/vendor",
+		"%{IncludeDir.glad}",
+		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.spdlog}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.imgui}",
+		"%{IncludeDir.stb}"
 	}
 
 	links
 	{
 		"EuropaEngine"
+	}
+	
+	defines
+	{
+		"%{GlobalDefines.stb_image}"
 	}
 
 	filter "system:windows"

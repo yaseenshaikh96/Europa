@@ -3,7 +3,7 @@
 
 #include "EuropaEngine/Renderer/Renderer2D.h"
 
-#include "EuropaEngine/Platforms/OpenGL/OpenGLShader.h"
+#include "EuropaEngine/Platforms/Graphics/OpenGL/OpenGLShader.h"
 
 namespace EuropaEngine
 {

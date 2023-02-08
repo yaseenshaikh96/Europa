@@ -1,7 +1,7 @@
 #include "EuropaEnginePCH.h"
 #include "Application.h"
 
-#include <glad/glad.h>
+#include "EuropaEngine/Renderer/Renderer.h"
 
 namespace EuropaEngine
 {
@@ -25,6 +25,10 @@ namespace EuropaEngine
 		
 		m_ImguiLayer = CreateRef<ImguiLayer>();
 		PushOverlay(m_ImguiLayer);
+
+		Renderer::Init();
+
+		EUROPA_CORE_INFO("Appilication Initialized");
 	}
 
 	void Application::PushLayer(Ref<AppLayer> layer)
@@ -48,9 +52,6 @@ namespace EuropaEngine
 	{
 		while (m_IsRunning)
 		{
-			glClearColor(0.4, 0.01, 0.5, 1.0);
-			glClear(GL_COLOR_BUFFER_BIT);
-
 			for (auto it = m_AppLayerStack.rbegin(); it != m_AppLayerStack.rend(); it++)
 			{
 				(*it)->OnUpdate();

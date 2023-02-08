@@ -18,7 +18,8 @@ project "EuropaSandBox"
 		"src",
 		"%{wks.location}/EuropaEngine/src",
 		"%{wks.location}/EuropaEngine/vendor",
-		"%{IncludeDir.spdlog}"
+		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.glm}"
 	}
 
 	links

@@ -18,6 +18,7 @@ project "EuropaEngine"
 
 	defines
 	{
+		"%{GlobalDefines.stb_image}"
 	}
 
 	includedirs

@@ -1,8 +1,9 @@
 #pragma once
 
-#include "EuropaEngine/Core/Core.h"
 #include <string>
 #include <glm/glm.hpp>
+
+#include "EuropaEngine/Core/Defines.h"
 
 namespace EuropaEngine
 {

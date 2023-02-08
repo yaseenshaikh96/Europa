@@ -2,7 +2,7 @@
 #include "Texture.h"
 
 #include "Renderer.h"
-#include "EuropaEngine/Platforms/OpenGL/OpenGLTexture.h"
+#include "EuropaEngine/Platforms/Graphics/OpenGL/OpenGLTexture.h"
 
 namespace EuropaEngine
 {

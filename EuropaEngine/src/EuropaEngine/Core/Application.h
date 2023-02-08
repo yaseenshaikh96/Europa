@@ -25,6 +25,7 @@ namespace EuropaEngine
 		bool OnWindowCloseEvent(WindowCloseEvent& e);
 	
 		inline static Application& Get() { return *s_Instance; }
+		inline Ref<ImguiLayer> GetImguiLayer() { return m_ImguiLayer; }
 		inline Ref<Window> GetWindow() { return m_Window; }
 
 	private:

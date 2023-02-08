@@ -1,6 +1,8 @@
 #include "EuropaEnginePCH.h"
 #include "Logger.h"
 
+#include <spdlog/spdlog.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 
 namespace EuropaEngine {
 

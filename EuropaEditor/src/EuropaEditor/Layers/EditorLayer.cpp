@@ -1,18 +1,29 @@
 #include "EditorLayer.h"
 
-#include <Imgui/imgui.h>
+#include <imgui.h>
+
+#include <glm/gtc/type_ptr.hpp> 
+#include <glm/gtc/matrix_transform.hpp>
 
 
 namespace EuropaEngine
 {
 	EditorLayer::EditorLayer()
 		:
-		AppLayer("EditorLayer")
+		AppLayer("EditorLayer"),
+		//m_Camera(glm::ortho(-1, 1, -1, 1)),
+		m_OrthographicCameraController(1280.0f/720.0f, true),
+		m_CameraTransform(0),
+		m_ViewPortSize(1280, 720)
 	{
 	}
 
 	void EditorLayer::OnAttach()
 	{
+		FrameBufferSpecification specs;
+		specs.Width = static_cast<uint32_t>(1280.0f);
+		specs.Height = static_cast<uint32_t>(720.0f);
+		m_FrameBuffer = FrameBuffer::Create(specs);
 	}
 	void EditorLayer::OnDetach()
 	{
@@ -20,8 +31,7 @@ namespace EuropaEngine
 	}
 	void EditorLayer::OnImguiRender()
 	{
-		EUROPA_CORE_INFO("OnImguiRender");
-
+		return;
 		static bool dockspaceOpen = true;
 		static bool opt_fullscreen_persistant = true;
 		bool opt_fullscreen = opt_fullscreen_persistant;
@@ -74,13 +84,44 @@ namespace EuropaEngine
 
 		ImGui::End(); // settings
 
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+		ImGui::Begin("ViewPort");
+
+		m_ViewPortFocused = ImGui::IsWindowFocused();
+		Application::Get().GetImguiLayer()->SetBlockImGuiEvent(!m_ViewPortFocused);
+
+		ImVec2 viewportPanelSize = ImGui::GetContentRegionAvail();
+		m_ViewPortSize = { viewportPanelSize.x, viewportPanelSize.y };
+		uint32_t frameBuffer = m_FrameBuffer->GetColorAttachmentID();
+		ImGui::Image((void*)frameBuffer, ImVec2{ m_ViewPortSize.x, m_ViewPortSize.y }, ImVec2{ 0, 1 }, ImVec2{ 1, 0 });
+
+		ImGui::End();
+		ImGui::PopStyleVar(); // viewport
+
 
 		ImGui::End(); // docking
 	}
 
 	void EditorLayer::OnUpdate()
 	{
+			//m_FrameBuffer->Bind();
+		{
+			Renderer2D::ResetStatistics();
+			RenderCommand::SetClearColor({ 0.4f, 0.01f, 0.5f, 1.0f }); // good purple
+			RenderCommand::Clear();
+		}
 
+		//m_CubeRotation += 90 * timeStep;
+		{
+			Renderer2D::BeginScene(m_OrthographicCameraController.GetCamera());
+			Renderer2D::DrawAxisAlignedQuadFilled(
+				glm::vec3(0.0f, 0.0f, 0.0f),
+				glm::vec2(1.0f, 1.0f),
+				glm::vec4(1.0f, 0.2f, 0.2f, 1.0f));
+			
+			Renderer2D::EndScene();
+		}
+			//m_FrameBuffer->UnBind();
 	}
 
 	void EditorLayer::OnEvent(Event& e)
