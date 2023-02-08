@@ -25,6 +25,7 @@ group "Core-Dependencies"
 	include "EuropaEngine/vendor/GLFW"
 	include "EuropaEngine/vendor/spdlog"
 	include "EuropaEngine/vendor/imgui"
+	include "EuropaEngine/vendor/glm"
 group ""
 
 

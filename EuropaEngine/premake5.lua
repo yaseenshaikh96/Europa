@@ -26,6 +26,7 @@ project "EuropaEngine"
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.spdlog}",
+		"%{IncludeDir.glm}",
 		"%{IncludeDir.imgui}"
 	}
 
@@ -61,3 +62,4 @@ project "EuropaEngine"
 		defines "EUROPA_ENGINE_DIST"
 		runtime "Release"
 		optimize "on"
+		symbols "off"
